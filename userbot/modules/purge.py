@@ -17,22 +17,22 @@ async def fastpurger(purg):
     itermsg = purg.client.iter_messages(chat, min_id=purg.reply_to_msg_id)
     count = 0
 
-    if purg.reply_to_msg_id is not None:
-        async for msg in itermsg:
-            msgs.append(msg)
-            count += 1
-            msgs.append(purg.reply_to_msg_id)
-            if len(msgs) == 100:
-                await purg.client.delete_messages(chat, msgs)
-                msgs = []
-    else:
+    if purg.reply_to_msg_id is None:
         return await purg.edit("**I need a mesasge to start purging from.**")
 
+    async for msg in itermsg:
+        msgs.append(msg)
+        count += 1
+        msgs.append(purg.reply_to_msg_id)
+        if len(msgs) == 100:
+            await purg.client.delete_messages(chat, msgs)
+            msgs = []
     if msgs:
         await purg.client.delete_messages(chat, msgs)
     done = await purg.client.send_message(
-        purg.chat_id, "**Fast purge complete!**" f"\nPurged {str(count)} messages"
+        purg.chat_id, f'**Fast purge complete!**\nPurged {count} messages'
     )
+
     await sleep(2)
     await done.delete()
 

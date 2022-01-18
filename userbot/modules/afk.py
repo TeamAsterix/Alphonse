@@ -55,17 +55,12 @@ async def mention_afk(mention):
     global USERS
     global ISAFK
     if mention.message.mentioned and ISAFK:
-        is_bot = False
-        if sender := await mention.get_sender():
-            is_bot = sender.bot
-        if not is_bot and mention.sender_id not in USERS:
-            if AFKREASON:
-                await mention.reply("I'm AFK right now." f"\nBecause **{AFKREASON}**")
-            else:
-                await mention.reply(str(choice(AFKSTR)))
-            USERS.update({mention.sender_id: 1})
-        else:
-            if not is_bot and sender:
+        is_bot = sender.bot if (sender := await mention.get_sender()) else False
+
+        if is_bot:
+            pass
+        elif mention.sender_id in USERS:
+            if sender:
                 if USERS[mention.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
                         await mention.reply(
@@ -75,6 +70,12 @@ async def mention_afk(mention):
                     else:
                         await mention.reply(str(choice(AFKSTR)))
                 USERS[mention.sender_id] = USERS[mention.sender_id] + 1
+        else:
+            if AFKREASON:
+                await mention.reply("I'm AFK right now." f"\nBecause **{AFKREASON}**")
+            else:
+                await mention.reply(str(choice(AFKSTR)))
+            USERS.update({mention.sender_id: 1})
         COUNT_MSG = COUNT_MSG + 1
 
 
@@ -154,16 +155,18 @@ async def type_afk_is_not_true(notafk):
         if BOTLOG:
             await notafk.client.send_message(
                 BOTLOG_CHATID,
-                f"You've recieved {str(COUNT_MSG)} messages from {str(len(USERS))} chats while you were away",
+                f"You've recieved {COUNT_MSG} messages from {len(USERS)} chats while you were away",
             )
+
             for i in USERS:
                 if i is not None:
                     name = await notafk.client.get_entity(i)
                     name0 = str(name.first_name)
                     await notafk.client.send_message(
                         BOTLOG_CHATID,
-                        f"[{name0}](tg://user?id={str(i)}) sent you `{str(USERS[i])} message(s)`",
+                        f'[{name0}](tg://user?id={i}) sent you `{USERS[i]} message(s)`',
                     )
+
         COUNT_MSG = 0
         USERS = {}
         AFKREASON = None

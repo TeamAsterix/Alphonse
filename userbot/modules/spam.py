@@ -30,7 +30,7 @@ async def spammers(e):
     counter = int(e.pattern_match.group(1))
     spam_message = str(e.pattern_match.group(2))
     await e.delete()
-    await asyncio.wait([e.respond(spam_message) for i in range(counter)])
+    await asyncio.wait([e.respond(spam_message) for _ in range(counter)])
 
 
 @register(outgoing=True, pattern=r"^\.picspam (\d+) (.+)")

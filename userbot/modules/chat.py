@@ -92,8 +92,6 @@ async def _(event):
                     await event.edit(str(e))
                     return
             await event.edit("`Invited Unsuccessfully`")
-            await sleep(3)
-            await event.delete()
         else:
             # https://lonamiwebs.github.io/Telethon/methods/channels/invite_to_channel.html
             for user_id in to_add_users.split(" "):
@@ -107,8 +105,9 @@ async def _(event):
                     await event.edit(str(e))
                     return
             await event.edit("`Invited Successfully`")
-            await sleep(3)
-            await event.delete()
+
+        await sleep(3)
+        await event.delete()
 
 
 @register(outgoing=True, pattern=r"^\.kickme$")
