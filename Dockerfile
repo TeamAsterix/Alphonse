@@ -1,4 +1,4 @@
-FROM kenhv/kensurbot:debian
+FROM teamalphonse/alphonse:debian
 
 RUN set -ex \
     && git clone -b master https://github.com/TeamAlphonse/Alphonse /root/userbot \
