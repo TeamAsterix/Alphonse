@@ -247,7 +247,7 @@ async def ban(bon):
     if reason:
         await bon.edit(f"**{str(user.id)}** was banned!\nReason: {reason}")
     else:
-        await bon.edit(f"**{str(user.id)}** was banned!")
+        await bon.edit(f'**{user.id}** was banned!')
     # Announce to the logging group if we have banned the person
     # successfully!
     if BOTLOG:
@@ -647,10 +647,7 @@ async def pin(msg):
 
     options = msg.pattern_match.group(1)
 
-    is_silent = True
-
-    if options.lower() == "loud":
-        is_silent = False
+    is_silent = options.lower() != "loud"
 
     try:
         await msg.client(UpdatePinnedMessageRequest(msg.to_id, to_pin, is_silent))
@@ -682,7 +679,7 @@ async def kick(usr):
         await usr.client.kick_participant(usr.chat_id, user.id)
         await sleep(0.5)
     except Exception as e:
-        return await usr.edit(NO_PERM + f"\n{str(e)}")
+        return await usr.edit(NO_PERM + f'\n{e}')
 
     if reason:
         await usr.edit(

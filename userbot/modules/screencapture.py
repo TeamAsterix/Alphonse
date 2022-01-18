@@ -47,9 +47,7 @@ async def capture(url):
     im_png = driver.get_screenshot_as_png()
     # saves screenshot of entire page
     driver.quit()
-    message_id = url.message.id
-    if url.reply_to_msg_id:
-        message_id = url.reply_to_msg_id
+    message_id = url.reply_to_msg_id or url.message.id
     with io.BytesIO(im_png) as out_file:
         out_file.name = "screencapture.png"
         await url.edit("**Uploading screenshot as file...**")

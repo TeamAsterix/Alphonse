@@ -135,8 +135,11 @@ async def upstream(event):
     off_repo = UPSTREAM_REPO_URL
     force_update = False
     try:
-        txt = "**Oops.. Updater cannot continue due to "
-        txt += "some problems**\n`LOGTRACE:`\n"
+        txt = (
+            "**Oops.. Updater cannot continue due to "
+            + "some problems**\n`LOGTRACE:`\n"
+        )
+
         repo = Repo()
     except NoSuchPathError as error:
         await event.edit(f"{txt}\n**Directory** `{error}` **was not found.**")
@@ -202,12 +205,15 @@ async def upstream(event):
 
     if conf == "now":
         for commit in changelog.splitlines():
-            if commit.startswith("- [NQ]"):
-                if HEROKU_APP_NAME is not None and HEROKU_API_KEY is not None:
-                    return await event.edit(
-                        "**Quick update has been disabled for this update; "
-                        "use** `.update deploy` **instead.**"
-                    )
+            if (
+                commit.startswith("- [NQ]")
+                and HEROKU_APP_NAME is not None
+                and HEROKU_API_KEY is not None
+            ):
+                return await event.edit(
+                    "**Quick update has been disabled for this update; "
+                    "use** `.update deploy` **instead.**"
+                )
         await event.edit("**Perfoming a quick update, please wait...**")
         await update(event, repo, ups_rem, ac_br)
 
