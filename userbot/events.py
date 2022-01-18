@@ -65,13 +65,8 @@ def register(**args):
 
             try:
                 await func(check)
-            # Thanks to @kandnub for this HACK.
-            # Raise StopPropagation to Raise StopPropagation
-            # This needed for AFK to working properly
             except events.StopPropagation:
                 raise events.StopPropagation
-            # This is a gay exception and must be passed out. So that it doesnt
-            # spam chats
             except KeyboardInterrupt:
                 pass
             except BaseException as e:
@@ -128,8 +123,6 @@ def register(**args):
                         )
 
                     remove("error.log")
-            else:
-                pass
 
         if not disable_edited:
             bot.add_event_handler(wrapper, events.MessageEdited(**args))

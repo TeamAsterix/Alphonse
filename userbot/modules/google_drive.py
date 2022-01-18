@@ -310,7 +310,7 @@ async def download(gdrive, service, uri=None):
                 await reset_parentId()
                 return reply
     except Exception as e:
-        reply = f"**GDrive**\n\n" "**Status:** Failed.\n" f"**Reason:** `{str(e)}`"
+        reply = f'**GDrive**\n\n**Status:** Failed.\n**Reason:** `{e}`'
         return reply
     return
 
@@ -697,25 +697,23 @@ async def lists(gdrive):
     else:
         page_size = 25  # default page_size is 25
     checker = gdrive.pattern_match.group(2)
-    if checker != "":
-        if checker.startswith("-p"):
-            parents = checker.split(None, 2)[1]
-            try:
-                name = checker.split(None, 2)[2]
-            except IndexError:
-                query = f"'{parents}' in parents and (name contains '*')"
-            else:
-                query = f"'{parents}' in parents and (name contains '{name}')"
-        else:
-            if re.search("-p (.*)", checker):
-                parents = re.search("-p (.*)", checker).group(1)
-                name = checker.split("-p")[0].strip()
-                query = f"'{parents}' in parents and (name contains '{name}')"
-            else:
-                name = checker
-                query = f"name contains '{name}'"
-    else:
+    if checker == "":
         query = ""
+    elif checker.startswith("-p"):
+        parents = checker.split(None, 2)[1]
+        try:
+            name = checker.split(None, 2)[2]
+        except IndexError:
+            query = f"'{parents}' in parents and (name contains '*')"
+        else:
+            query = f"'{parents}' in parents and (name contains '{name}')"
+    elif re.search("-p (.*)", checker):
+        parents = re.search("-p (.*)", checker).group(1)
+        name = checker.split("-p")[0].strip()
+        query = f"'{parents}' in parents and (name contains '{name}')"
+    else:
+        name = checker
+        query = f"name contains '{name}'"
     service = await create_app(gdrive)
     if service is False:
         return False
@@ -742,7 +740,7 @@ async def lists(gdrive):
                 .execute()
             )
         except HttpError as e:
-            await gdrive.edit(f"Error: {str(e)}")
+            await gdrive.edit(f'Error: {e}')
             return
         for files in response.get("files", []):
             if len(result) >= page_size:
@@ -876,7 +874,7 @@ async def google_drive_managers(gdrive):
                 try:
                     f = await get_information(service, f_id)
                 except Exception as e:
-                    reply = f"**Error:** `{str(e)}`\n"
+                    reply = f'**Error:** `{e}`\n'
                     continue
             name = f.get("name")
             mimeType = f.get("mimeType")
@@ -887,7 +885,7 @@ async def google_drive_managers(gdrive):
             try:
                 service.files().delete(fileId=f_id, supportsAllDrives=True).execute()
             except HttpError as e:
-                reply = f"**Error:** {str(e)}\n"
+                reply = f'**Error:** {e}\n'
                 continue
             else:
                 reply = "**GDrive**\n\n" f"{status}\n" f"`{name}`"
@@ -901,7 +899,7 @@ async def google_drive_managers(gdrive):
                 try:
                     f = await get_information(service, f_id)
                 except Exception as e:
-                    reply = f"**Error:** `{str(e)}`"
+                    reply = f'**Error:** `{e}`'
                     continue
             # If exists parse file/folder information
             name_or_id = f.get("name")  # override input value
