@@ -1,0 +1,146 @@
+{
+  "name": "Alphonse",
+  "description": "[Alphonse] A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.",
+  "logo": "#",
+  "keywords": ["telegram", "userbot", "plugin", "modular", "productivity"],
+  "repository": "https://github.com/TeamAlphonse/Alphonse",
+  "website": "#",
+  "success_url": "#",
+  "stack": "container",
+  "env": {
+    "ALIVE_NAME": {
+      "description": "Set your name which will be displayed on .alive messages, etc."
+    },
+    "OWNER_ID": {
+      "description": "Set your telegram id to show profile which will be displayed on .alive messages",
+      "required": "True"
+    },
+    "API_KEY": {
+      "description": "Get this value from my.telegram.org."
+    },
+    "API_HASH": {
+      "description": "Get this value from my.telegram.org."
+    },
+    "STRING_SESSION": {
+      "description": "Get this value by running [python3 string_session.py] in Termux or local system."
+    },
+    "HEROKU_API_KEY": {
+      "description": "Your Heroku API key, get it from 'https://dashboard.heroku.com/account'"
+    },
+    "HEROKU_APP_NAME": {
+      "description": "Add the Heroku app name here. It helps with userbot updates."
+    },
+    "COUNTRY": {
+      "description": "Set your Country to be used in the .time and .date commands.",
+      "required": false
+    },
+    "TZ_NUMBER": {
+      "description": "Change this value in case your country has multiple Time Zones.",
+      "value": "1",
+      "required": false
+    },
+    "OPEN_WEATHER_MAP_APPID": {
+      "description": "Get your own APPID (API key)from https://api.openweathermap.org/data/2.5/weather",
+      "required": false
+    },
+    "BOTLOG": {
+      "description": "Incase you want to turn off logging, put this to false",
+      "value": "True"
+    },
+    "BOTLOG_CHATID": {
+      "description": "ChatID of the Log group. Make sure no one else is in this group except you."
+    },
+    "CONSOLE_LOGGER_VERBOSE": {
+      "description": "If you need verbosity on the console logging",
+      "value": "False"
+    },
+    "PM_AUTO_BAN": {
+      "description": "PMPermit module, let's you approve/disapprove PMs. Unapproved users will get blocked after their 5th message.",
+      "value": "False"
+    },
+    "OCR_SPACE_API_KEY": {
+      "description": "OCR API Key for .ocr command. Get from https://ocr.space/ocrapi",
+      "required": false
+    },
+    "REM_BG_API_KEY": {
+      "description": "API Key for .rbg command. Get from https://www.remove.bg/api",
+      "required": false
+    },
+    "ANTI_SPAMBOT": {
+      "description": "Kicks spambots from groups after they join. [Requires admin powers in groups to kick.]",
+      "value": "False"
+    },
+    "ANTI_SPAMBOT_SHOUT": {
+      "description": "Report spambots to @admins in groups after they join, just in case when you don't have admin powers to kick that shit yourself.",
+      "value": "False"
+    },
+    "TMP_DOWNLOAD_DIRECTORY": {
+      "description": "Download location for many modules (GDrive, .download etc..)",
+      "value": "./downloads/"
+    },
+    "CLEAN_WELCOME": {
+      "description": "When a new person joins, the old welcome message is deleted.",
+      "value": "True"
+    },
+    "LASTFM_API": {
+      "description": "API Key for Last.FM module. [Get one from - https://www.last.fm/api/account/create]",
+      "required": false
+    },
+    "LASTFM_SECRET": {
+      "description": "SECRET Key for Last.FM module. [Get one from - https://www.last.fm/api/account/create]",
+      "required": false
+    },
+    "LASTFM_USERNAME": {
+      "description": "Last.FM Username",
+      "required": false
+    },
+    "LASTFM_PASSWORD": {
+      "description": "Last.FM Password",
+      "required": false
+    },
+    "BIO_PREFIX": {
+      "description": "Prefix for Last.FM Module Bio.",
+      "required": false
+    },
+    "DEFAULT_BIO": {
+      "description": "Default profile bio.",
+      "required": false
+    },
+    "G_DRIVE_DATA": {
+      "description": "Your client_secret.json.",
+      "required": false
+    },
+    "G_DRIVE_INDEX_URL": {
+      "description": "Your Cloudflare Google Drive Index URL",
+      "required": false
+    },
+    "GENIUS_ACCESS_TOKEN": {
+      "description": "Client Access Token from https://genius.com/api-clients, needed for lyrics module.",
+      "required": false
+    },
+    "WEATHER_DEFCITY": {
+      "description": "Set the default city for the userbot's weather module.",
+      "required": false
+    },
+    "LOGSPAMMER": {
+      "description": "Despite the name, it avoids sending logs (if there's a crash) everywhere and stores it in your botlog group instead.",
+      "value": "True"
+    },
+    "DEEZER_ARL_TOKEN": {
+      "description": "Put your Deezer ARL token here.",
+      "required": false
+    },
+    "USR_TOKEN_UPTOBOX": {
+      "description": "API for direct link uptobox, https://docs.uptobox.com/#how-to-find-my-api-token",
+      "required": false
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "12"
+      }
+    }
+  ]
+}
