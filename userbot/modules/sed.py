@@ -1,4 +1,3 @@
-
 """ Userbot command for sed. """
 
 import re

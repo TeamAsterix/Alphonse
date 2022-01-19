@@ -1,4 +1,3 @@
-
 #
 """ Userbot module containing hash and encode/decode commands. """
 

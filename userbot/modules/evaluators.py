@@ -1,4 +1,3 @@
-
 """Userbot module for executing code and terminal commands from Telegram."""
 
 import asyncio

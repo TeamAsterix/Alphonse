@@ -1,4 +1,3 @@
-
 #
 """ Userbot initialization. """
 
@@ -6,20 +5,20 @@ import os
 import signal
 import sys
 import time
-from os import remove
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from distutils.util import strtobool
 from logging import DEBUG, INFO, basicConfig, getLogger
+from os import remove
 from pathlib import Path
 from platform import python_version
 
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from telethon import TelegramClient, version
+from telethon.errors.rpcerrorlist import MediaEmptyError
 from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 from telethon.sessions import StringSession
-from telethon.errors.rpcerrorlist import MediaEmptyError
 
 from .storage import Storage
 
@@ -119,10 +118,14 @@ if OWNER_ID:
     OWNER_ID = int(OWNER_ID)
 
 # Default .alive pic
-ALIVE_PIC = os.environ.get("ALIVE_PIC") or "https://telegra.ph/file/55b7f48eb952fe778da99.jpg"
+ALIVE_PIC = (
+    os.environ.get("ALIVE_PIC") or "https://telegra.ph/file/55b7f48eb952fe778da99.jpg"
+)
 
 # For customizing there alive message
-CUSTOM_ALIVE_TEXT = os.environ.get("CUSTOM_ALIVE_TEXT") or "☆ Alphonse Is Running Perfect!"
+CUSTOM_ALIVE_TEXT = (
+    os.environ.get("CUSTOM_ALIVE_TEXT") or "☆ Alphonse Is Running Perfect!"
+)
 CUSTOM_ALIVE_EMOJI = os.environ.get("CUSTOM_ALIVE_EMOJI") or "✮"
 
 # Userbot version
@@ -275,20 +278,24 @@ async def get_readable_time(seconds: int) -> str:
 async def update_restart_msg(chat_id, msg_id):
     img = ALIVE_PIC
     uptime = await get_readable_time((time.time() - StartTime))
-    output = (f"{CUSTOM_ALIVE_TEXT}\n\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀ :` {MENTION}\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Uᴘᴛɪᴍᴇ :` {uptime}\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {python_version()}\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀʙᴏᴛ Vᴇʀsɪᴏɴ :` {UBOT_VER}\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {version.__version__}\n")
+    output = (
+        f"{CUSTOM_ALIVE_TEXT}\n\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀ :` {MENTION}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Uᴘᴛɪᴍᴇ :` {uptime}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {python_version()}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀʙᴏᴛ Vᴇʀsɪᴏɴ :` {UBOT_VER}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {version.__version__}\n"
+    )
     if ALIVE_PIC:
         try:
             img = ALIVE_PIC
             pic_alive = await bot.send_file(chat_id, msg_id, img, caption=output)
             await alive.delete()
         except MediaEmptyError:
-            await alive.edit(output + "\n\n *`The provided logo is invalid."
-                             "\nMake sure the link is directed to the logo picture`")
+            await alive.edit(
+                output + "\n\n *`The provided logo is invalid."
+                "\nMake sure the link is directed to the logo picture`"
+            )
     else:
         await alive.edit(output)
 

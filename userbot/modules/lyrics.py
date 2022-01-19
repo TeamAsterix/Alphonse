@@ -1,4 +1,3 @@
-
 """
 Lyrics Plugin Syntax:
        .lyrics <aritst name> - <song name>

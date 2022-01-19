@@ -1,4 +1,3 @@
-
 """ Userbot module which contains afk-related commands """
 
 from asyncio import sleep
@@ -6,11 +5,11 @@ from random import choice, randint
 
 from telethon.events import StopPropagation
 
-from userbot import (  # noqa
+from userbot import (
     AFKREASON,
     BOTLOG,
     BOTLOG_CHATID,
-    CMD_HELP,
+    CMD_HELP,  # noqa
     COUNT_MSG,
     ISAFK,
     PM_AUTO_BAN,
@@ -164,7 +163,7 @@ async def type_afk_is_not_true(notafk):
                     name0 = str(name.first_name)
                     await notafk.client.send_message(
                         BOTLOG_CHATID,
-                        f'[{name0}](tg://user?id={i}) sent you `{USERS[i]} message(s)`',
+                        f"[{name0}](tg://user?id={i}) sent you `{USERS[i]} message(s)`",
                     )
 
         COUNT_MSG = 0

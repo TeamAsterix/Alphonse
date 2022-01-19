@@ -1,4 +1,3 @@
-
 """ Userbot module containing various sites direct links generators"""
 
 import asyncio

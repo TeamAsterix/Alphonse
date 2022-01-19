@@ -1,4 +1,3 @@
-
 """ Userbot module containing commands for keeping notes. """
 
 from asyncio import sleep

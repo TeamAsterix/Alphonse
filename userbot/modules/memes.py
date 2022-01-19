@@ -1,4 +1,3 @@
-
 """ Userbot module for having some fun with people. """
 
 from asyncio import sleep

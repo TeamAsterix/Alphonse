@@ -1,5 +1,3 @@
-
-
 # (c) Shrimadhav U K - UniBorg
 # Thanks to Ryoishin for porting.
 

@@ -1,4 +1,3 @@
-
 """ Userbot module for keeping control who PM you. """
 
 from sqlalchemy.exc import IntegrityError

@@ -310,7 +310,7 @@ async def download(gdrive, service, uri=None):
                 await reset_parentId()
                 return reply
     except Exception as e:
-        reply = f'**GDrive**\n\n**Status:** Failed.\n**Reason:** `{e}`'
+        reply = f"**GDrive**\n\n**Status:** Failed.\n**Reason:** `{e}`"
         return reply
     return
 
@@ -740,7 +740,7 @@ async def lists(gdrive):
                 .execute()
             )
         except HttpError as e:
-            await gdrive.edit(f'Error: {e}')
+            await gdrive.edit(f"Error: {e}")
             return
         for files in response.get("files", []):
             if len(result) >= page_size:
@@ -874,7 +874,7 @@ async def google_drive_managers(gdrive):
                 try:
                     f = await get_information(service, f_id)
                 except Exception as e:
-                    reply = f'**Error:** `{e}`\n'
+                    reply = f"**Error:** `{e}`\n"
                     continue
             name = f.get("name")
             mimeType = f.get("mimeType")
@@ -885,7 +885,7 @@ async def google_drive_managers(gdrive):
             try:
                 service.files().delete(fileId=f_id, supportsAllDrives=True).execute()
             except HttpError as e:
-                reply = f'**Error:** {e}\n'
+                reply = f"**Error:** {e}\n"
                 continue
             else:
                 reply = "**GDrive**\n\n" f"{status}\n" f"`{name}`"
@@ -899,7 +899,7 @@ async def google_drive_managers(gdrive):
                 try:
                     f = await get_information(service, f_id)
                 except Exception as e:
-                    reply = f'**Error:** `{e}`'
+                    reply = f"**Error:** `{e}`"
                     continue
             # If exists parse file/folder information
             name_or_id = f.get("name")  # override input value

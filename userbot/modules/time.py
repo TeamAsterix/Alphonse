@@ -1,4 +1,3 @@
-
 """ Userbot module for getting the date
     and time of any country or the userbot server.  """
 

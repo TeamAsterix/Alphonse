@@ -1,4 +1,3 @@
-
 """ Userbot module containing commands for keeping global notes. """
 
 from sqlalchemy.orm.exc import UnmappedInstanceError

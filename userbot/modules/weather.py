@@ -1,4 +1,3 @@
-
 """ Userbot module for getting the weather of a city. """
 
 import json

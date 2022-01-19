@@ -1,4 +1,3 @@
-
 """A module for helping ban group join spammers."""
 
 from asyncio import sleep

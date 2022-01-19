@@ -1,6 +1,6 @@
-
 """ Userbot module for getting information about the server. """
 
+import time
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from os import remove
@@ -10,9 +10,18 @@ from shutil import which
 from telethon import version
 from telethon.errors.rpcerrorlist import MediaEmptyError
 
-import time
-
-from userbot import ALIVE_PIC, ALIVE_NAME, DEFAULTUSER, MENTION, bot, get_readable_time, StartTime, UBOT_VER, CUSTOM_ALIVE_TEXT, CUSTOM_ALIVE_EMOJI, CMD_HELP
+from userbot import (
+    ALIVE_NAME,
+    ALIVE_PIC,
+    CMD_HELP,
+    CUSTOM_ALIVE_EMOJI,
+    CUSTOM_ALIVE_TEXT,
+    MENTION,
+    UBOT_VER,
+    StartTime,
+    bot,
+    get_readable_time,
+)
 from userbot.events import register
 
 
@@ -122,20 +131,24 @@ async def amireallyalive(alive):
     """For .alive command, check if the bot is running."""
     img = ALIVE_PIC
     uptime = await get_readable_time((time.time() - StartTime))
-    output = (f"{CUSTOM_ALIVE_TEXT}\n\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀ :` {MENTION}\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Uᴘᴛɪᴍᴇ :` {uptime}\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {python_version()}\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀʙᴏᴛ Vᴇʀsɪᴏɴ :` {UBOT_VER}\n"
-             f"{CUSTOM_ALIVE_EMOJI} `Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {version.__version__}\n")
+    output = (
+        f"{CUSTOM_ALIVE_TEXT}\n\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀ :` {MENTION}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Uᴘᴛɪᴍᴇ :` {uptime}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {python_version()}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀʙᴏᴛ Vᴇʀsɪᴏɴ :` {UBOT_VER}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {version.__version__}\n"
+    )
     if ALIVE_PIC:
         try:
             img = ALIVE_PIC
             pic_alive = await bot.send_file(alive.chat_id, img, caption=output)
             await alive.delete()
         except MediaEmptyError:
-            await alive.edit(output + "\n\n *`The provided logo is invalid."
-                             "\nMake sure the link is directed to the logo picture`")
+            await alive.edit(
+                output + "\n\n *`The provided logo is invalid."
+                "\nMake sure the link is directed to the logo picture`"
+            )
     else:
         await alive.edit(output)
 

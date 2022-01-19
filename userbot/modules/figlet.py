@@ -1,5 +1,3 @@
-
-
 import pyfiglet
 from emoji import get_emoji_regexp
 

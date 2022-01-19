@@ -1,4 +1,3 @@
-
 """ Userbot module for kanging stickers or making new ones. Thanks @ryoishin"""
 
 import io

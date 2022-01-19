@@ -1,4 +1,3 @@
-
 """ Userbot module for purging unneeded messages(usually spam or ot). """
 
 from asyncio import sleep
@@ -30,7 +29,7 @@ async def fastpurger(purg):
     if msgs:
         await purg.client.delete_messages(chat, msgs)
     done = await purg.client.send_message(
-        purg.chat_id, f'**Fast purge complete!**\nPurged {count} messages'
+        purg.chat_id, f"**Fast purge complete!**\nPurged {count} messages"
     )
 
     await sleep(2)

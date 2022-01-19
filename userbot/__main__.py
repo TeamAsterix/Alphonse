@@ -1,4 +1,3 @@
-
 """ Userbot start point """
 
 import sys

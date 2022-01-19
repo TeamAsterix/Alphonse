@@ -1,4 +1,3 @@
-
 """ Userbot module containing commands related to QR Codes. """
 
 import asyncio

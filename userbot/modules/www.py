@@ -1,4 +1,3 @@
-
 """ Userbot module containing commands related to the \
     Information Superhighway (yes, Internet). """
 
