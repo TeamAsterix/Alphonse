@@ -6,7 +6,7 @@ from random import choice, randint
 from telethon.events import StopPropagation
 
 from userbot import CMD_HELP  # noqa
-from userbot import AFKREASON, BOTLOG, BOTLOG_CHATID, PM_AUTO_BAN
+from userbot import AFKREASON, BOTLOG, BOTLOG_CHATID, PM_AUTO_BAN, ISAFK
 from userbot.events import register
 
 # ========================= CONSTANTS ============================
@@ -44,7 +44,6 @@ async def mention_afk(mention):
     """This function takes care of notifying the people who mention you that you are AFK."""
     global COUNT_MSG
     global USERS
-    global ISAFK
     if mention.message.mentioned and ISAFK:
         is_bot = sender.bot if (sender := await mention.get_sender()) else False
 
