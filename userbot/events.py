@@ -77,7 +77,7 @@ def register(**args):
 
                     link = "[Issues](https://github.com/TeamAlphonse/Alphonse/issues)"
                     text = (
-                        "**USERBOT ERROR REPORT**\n"
+                        "**ALPHONSE ERROR REPORT**\n"
                         "If you want to, you can report it"
                         f"- just upload this file to {link}.\n"
                         "I won't log anything except the fact of error and date\n"
