@@ -310,7 +310,7 @@ async def download(gdrive, service, uri=None):
                 await reset_parentId()
                 return reply
     except Exception as e:
-        reply = f"**GDrive**\n\n" "**Status:** Failed.\n" f"**Reason:** `{str(e)}`"
+        reply = f'**GDrive**\n\n**Status:** Failed.\n**Reason:** `{e}`'
         return reply
     return
 

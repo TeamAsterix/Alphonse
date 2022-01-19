@@ -55,10 +55,7 @@ async def unblacklist(event):
         del_blacklist_all()
         return await event.edit("**Cleared all blacklists!**")
 
-    id_exists = False
-    for i in get_blacklist():
-        if chat_id == i.chat_id:
-            id_exists = True
+    id_exists = any(chat_id == i.chat_id for i in get_blacklist())
 
     if not id_exists:
         return await event.edit("**This chat isn't blacklisted.**")
