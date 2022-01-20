@@ -915,7 +915,7 @@ class googleimagesdownload:
     ):
         # check the args and choose the URL
         if url:
-            pass
+            url = url
         elif similar_images:
             print(similar_images)
             keywordem = self.similar_images(similar_images)
