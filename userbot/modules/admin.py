@@ -12,6 +12,7 @@ from telethon.errors import (
     PhotoCropSizeSmallError,
 )
 from telethon.errors.rpcerrorlist import (
+    BadRequestError,
     MessageTooLongError,
     UserAdminInvalidError,
     UserIdInvalidError,
