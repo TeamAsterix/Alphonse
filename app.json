@@ -8,9 +8,6 @@
   "success_url": "#",
   "stack": "container",
   "env": {
-    "ALIVE_NAME": {
-      "description": "Set your name which will be displayed on .alive messages, etc."
-    },
     "OWNER_ID": {
       "description": "Set your telegram id to show profile which will be displayed on .alive messages",
       "required": "True"

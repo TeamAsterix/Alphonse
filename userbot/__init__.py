@@ -110,7 +110,7 @@ ANTI_SPAMBOT = strtobool(os.environ.get("ANTI_SPAMBOT", "False"))
 ANTI_SPAMBOT_SHOUT = strtobool(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
 
 # Default .alive name
-ALIVE_NAME = os.environ.get("ALIVE_NAME")
+ALIVE_NAME = "Owner"
 
 # Owner id to show profile link of given id as owner
 OWNER_ID = os.environ.get("OWNER_ID", None)
