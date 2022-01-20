@@ -136,8 +136,8 @@ async def get_curr_track(lfmbio):
             playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
             SONG = playing.get_title()
             ARTIST = playing.get_artist()
-            oldsong = environ.get("oldsong")
-            oldartist = environ.get("oldartist")
+            oldsong = environ.get("oldsong", None)
+            oldartist = environ.get("oldartist", None)
             if playing is not None and SONG != oldsong and ARTIST != oldartist:
                 environ["oldsong"] = str(SONG)
                 environ["oldartist"] = str(ARTIST)
