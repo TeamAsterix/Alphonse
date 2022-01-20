@@ -718,6 +718,7 @@ class googleimagesdownload:
         print(
             "completed ====> " + image_name.encode("raw_unicode_escape").decode("utf-8")
         )
+        return
 
     @staticmethod
     def similar_images(similar_images):
@@ -1001,6 +1002,7 @@ class googleimagesdownload:
         except OSError as e:
             if e.errno != 17:
                 raise
+        return
 
     # Download Image thumbnails
     def download_image_thumbnail(
