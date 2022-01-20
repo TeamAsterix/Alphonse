@@ -21,6 +21,7 @@ async def help(event):
         final = "**List of all loaded module(s)[🤖](https://telegra.ph/file/aaacd9d754a0a2b9c2522.jpg)**\n\
                  \nSpecify which module do you want help for! \
                  \n**Usage:** `.help` <module name>\n\n"
+                  link_preview=True
 
         temp = "".join(str(i) + " " for i in CMD_HELP)
         temp = sorted(temp.split())
