@@ -23,7 +23,7 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-os.environ['OWNER_ID'] = (await bot.get_me()).id
+os.environ["OWNER_ID"] = (await bot.get_me()).id
 
 LOGS.info("Your userbot is running!")
 
