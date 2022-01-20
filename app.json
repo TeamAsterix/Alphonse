@@ -44,10 +44,6 @@
     "CLEAN_WELCOME": {
       "description": "When a new person joins, the old welcome message is deleted.",
       "value": "True"
-    },
-    "LOGSPAMMER": {
-      "description": "Despite the name, it avoids sending logs (if there's a crash) everywhere and stores it in your botlog group instead.",
-      "value": "True"
     }
   },
   "addons": [
