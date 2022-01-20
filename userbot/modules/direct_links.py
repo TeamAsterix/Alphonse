@@ -97,7 +97,7 @@ async def zippy_share(url: str) -> str:
     evaljs = EvalJs()
     setattr(evaljs, "x", None)
     evaljs.execute(js_content)
-    js_content = evaljs.x
+    js_content = getattr(evaljs, "x")
 
     return f"https://{link}.zippyshare.com{js_content}"
 
