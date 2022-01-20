@@ -8,10 +8,6 @@
   "success_url": "#",
   "stack": "container",
   "env": {
-    "OWNER_ID": {
-      "description": "Set your telegram id to show profile which will be displayed on .alive messages",
-      "required": "True"
-    },
     "API_KEY": {
       "description": "Get this value from my.telegram.org."
     },
