@@ -71,8 +71,8 @@ STRING_SESSION = os.environ.get("STRING_SESSION")
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", 0))
 
 # Userbot logging feature switch.
-BOTLOG = strtobool(os.environ.get("BOTLOG", "False"))
-LOGSPAMMER = strtobool(os.environ.get("LOGSPAMMER", "False"))
+BOTLOG = strtobool(os.environ.get("BOTLOG", "True"))
+LOGSPAMMER = strtobool(os.environ.get("LOGSPAMMER", "True"))
 
 # Bleep Blop, this is a bot ;)
 PM_AUTO_BAN = strtobool(os.environ.get("PM_AUTO_BAN", "False"))
@@ -139,7 +139,7 @@ TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
 ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY") or "./zips"
 
 # Clean Welcome
-CLEAN_WELCOME = strtobool(os.environ.get("CLEAN_WELCOME") or "False")
+CLEAN_WELCOME = strtobool(os.environ.get("CLEAN_WELCOME") or "True")
 
 # Last.fm Module
 BIO_PREFIX = os.environ.get("BIO_PREFIX")
