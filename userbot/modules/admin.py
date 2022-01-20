@@ -792,6 +792,8 @@ async def get_usersdel(show):
                     mentions += (
                         f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`"
                     )
+        #       else:
+        #                mentions += f"\nDeleted Account `{user.id}`"
         else:
             searchq = show.pattern_match.group(1)
             async for user in show.client.iter_participants(
@@ -801,6 +803,8 @@ async def get_usersdel(show):
                     mentions += (
                         f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`"
                     )
+        #       else:
+    #              mentions += f"\nDeleted Account `{user.id}`"
     except ChatAdminRequiredError as err:
         mentions += " " + str(err) + "\n"
     try:
