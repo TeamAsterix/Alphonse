@@ -703,7 +703,6 @@ class googleimagesdownload:
         image_name = str(url[(url.rfind("/")) + 1 :])
         if "?" in image_name:
             image_name = image_name[: image_name.find("?")]
-        # if ".jpg" in image_name or ".gif" in image_name or ".png" in image_name or ".bmp" in image_name or ".svg" in image_name or ".webp" in image_name or ".ico" in image_name:
         if any(map(lambda extension: extension in image_name, extensions)):
             file_name = main_directory + "/" + image_name
         else:
@@ -1318,7 +1317,6 @@ class googleimagesdownload:
                 break
             elif arguments["offset"] and count <= int(arguments["offset"]):
                 count += 1
-                # page = page[end_content:]
             else:
                 # format the item for readability
                 object = self.format_object(image_objects[i])
