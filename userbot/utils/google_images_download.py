@@ -1659,7 +1659,7 @@ def main():
             _, errors = response.download(
                 arguments
             )  # wrapping response in a variable just for consistency
-            total_errors = total_errors + errors
+            total_errors += errors
 
         t1 = time.time()  # stop the timer
         total_time = (
