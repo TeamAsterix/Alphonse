@@ -18,10 +18,9 @@ async def help(event):
         else:
             await event.edit("Please specify a valid module name.")
     else:
-        final = "**List of all loaded module(s)[🤖](https://telegra.ph/file/aaacd9d754a0a2b9c2522.jpg)**\n\
+        final = "**List of all loaded modules of Alphonse[🤖](https://telegra.ph/file/aaacd9d754a0a2b9c2522.jpg).**\n\
                  \nSpecify which module do you want help for! \
-                 \n**Usage:** `.help` <module name>\n\n"
-                  link_preview=True
+                 \n**Usage:** `.help` <module name>\n\n
 
         temp = "".join(str(i) + " " for i in CMD_HELP)
         temp = sorted(temp.split())
