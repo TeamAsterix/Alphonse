@@ -30,10 +30,6 @@
     "HEROKU_APP_NAME": {
       "description": "Add the Heroku app name here. It helps with userbot updates."
     },
-    "BOTLOG": {
-      "description": "Incase you want to turn off logging, put this to false",
-      "value": "True"
-    },
     "BOTLOG_CHATID": {
       "description": "ChatID of the Log group. Make sure no one else is in this group except you."
     },
