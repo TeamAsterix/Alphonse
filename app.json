@@ -122,6 +122,7 @@
       "description": "Despite the name, it avoids sending logs (if there's a crash) everywhere and stores it in your botlog group instead.",
       "value": "True"
     },
+    }
   "addons": [
     {
       "plan": "heroku-postgresql",
