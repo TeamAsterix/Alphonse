@@ -32,10 +32,6 @@
     },
     "BOTLOG_CHATID": {
       "description": "ChatID of the Log group. Make sure no one else is in this group except you."
-    },
-    "CLEAN_WELCOME": {
-      "description": "When a new person joins, the old welcome message is deleted.",
-      "value": "True"
     }
   },
   "addons": [
