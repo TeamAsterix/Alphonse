@@ -110,7 +110,7 @@ ANTI_SPAMBOT = strtobool(os.environ.get("ANTI_SPAMBOT", "False"))
 ANTI_SPAMBOT_SHOUT = strtobool(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
 
 # Default .alive name
-ALIVE_NAME = "Owner"
+ALIVE_NAME = "Master"
 
 # Owner id to show profile link of given id as owner
 OWNER_ID = os.environ.get("OWNER_ID", None)
@@ -119,7 +119,7 @@ if OWNER_ID:
 
 # Default .alive pic
 ALIVE_PIC = (
-    os.environ.get("ALIVE_PIC") or "https://telegra.ph/file/55b7f48eb952fe778da99.jpg"
+    os.environ.get("ALIVE_PIC") or "https://telegra.ph/file/9d264d95793ce0c15946b.jpg"
 )
 
 # For customizing there alive message
@@ -185,8 +185,6 @@ GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN")
 # Uptobox
 USR_TOKEN = os.environ.get("USR_TOKEN_UPTOBOX")
 
-# KensurBot version
-KENSURBOT_VERSION = "0.0.1"
 
 
 def shutdown_bot(*_):
@@ -285,6 +283,7 @@ async def update_restart_msg(chat_id, msg_id):
         f"{CUSTOM_ALIVE_EMOJI} `Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {python_version()}\n"
         f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀʙᴏᴛ Vᴇʀsɪᴏɴ :` {UBOT_VER}\n"
         f"{CUSTOM_ALIVE_EMOJI} `Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {version.__version__}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ :` [Group](t.me/AlphonseSupport)\n"
     )
     if ALIVE_PIC:
         try:
