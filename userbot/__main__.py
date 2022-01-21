@@ -28,7 +28,7 @@ for module_name in ALL_MODULES:
 
 async def set_id():
 
-    os.environ["OWNER_ID"] = str((await bot.get_me()).id)
+    os.environ["OWNER_ID"] = int((await bot.get_me()).id)
 
 
 LOGS.info("Your userbot is running!")
