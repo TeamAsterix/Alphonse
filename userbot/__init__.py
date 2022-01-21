@@ -186,7 +186,6 @@ GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN")
 USR_TOKEN = os.environ.get("USR_TOKEN_UPTOBOX")
 
 
-
 def shutdown_bot(*_):
     LOGS.info("Received SIGTERM.")
     bot.disconnect()
