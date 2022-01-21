@@ -17,19 +17,26 @@ A Powerful Telegram userbot based on Telethon .
 
 
 ## How to deploy Alphonse
+
+# Tutorial 
+ - Comming Soon
+
 ### Heroku Deploy
 
   - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/TeamAlphonse/Alphonse)
 
 ### Railway Deploy
- Comming Soon
-  
+ - Comming Soon
+
+###  Deploy On Qovery
+ - Comming Soon 
+
 ## Telegram  Support 🏪
 - [![Telegram Group](https://img.shields.io/badge/Telegram-Group-brightgreen)](https://t.me/AlphonseSupport)
 - [![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-brightgreen)](https://t.me/AlphonseUpdates)
 - [![Telegram Devs](https://img.shields.io/badge/Telegram-Dev's-brightgreen)](https://t.me/TheAlphonse/4)
 
-   
+    
 
 ## Disclaimer 
 
