@@ -24,11 +24,10 @@ A Powerful Telegram userbot based on Telethon .
 ### Railway Deploy
  Comming Soon
   
-## Support
-   
-    <a href="https://t.me/AlphonseUpdates"><img src="https://img.shields.io/badge/Channel%20Support%3F-Join-Red?&style=flat-square?&logo=telegram" width=220px></a></p>
-    
-    <a href="https://t.me/AlphonseSupport"><img src="https://img.shields.io/badge/Group%20Support%3F-Join-Red?&style=flat-square?&logo=telegram" width=220px></a></p>
+## Telegram  Support 🏪
+- [![Telegram Group](https://img.shields.io/badge/Telegram-Group-brightgreen)](https://t.me/AlphonseSupport)
+- [![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-brightgreen)](https://t.me/AlphonseUpdates)
+- [![Telegram Devs](https://img.shields.io/badge/Telegram-Dev's-brightgreen)](https://t.me/TheAlphonse/4)
 
    
 
