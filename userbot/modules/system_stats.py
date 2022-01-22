@@ -83,8 +83,7 @@ async def pipcheck(pip):
     """For .pip command, do a pip search."""
     if pip.text[0].isalpha() or pip.text[0] in ("/", "#", "@", "!"):
         return
-    pipmodule = pip.pattern_match.group(1)
-    if pipmodule:
+    if pipmodule := pip.pattern_match.group(1):
         await pip.edit("**Searching...**")
         pipc = await asyncrunapp(
             "pip3",
@@ -95,9 +94,9 @@ async def pipcheck(pip):
         )
 
         stdout, stderr = await pipc.communicate()
-        pipout = str(stdout.decode().strip()) + str(stderr.decode().strip())
-
-        if pipout:
+        if pipout := str(stdout.decode().strip()) + str(
+            stderr.decode().strip()
+        ):
             if len(pipout) > 4096:
                 await pip.edit("**Output too large, sending as file...**")
                 with open("output.txt", "w+") as file:
