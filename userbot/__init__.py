@@ -5,7 +5,6 @@ import os
 import signal
 import sys
 import time
-import ryoishin
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from distutils.util import strtobool
@@ -14,6 +13,7 @@ from os import remove
 from pathlib import Path
 from platform import python_version
 
+import ryoishin
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from telethon import TelegramClient, version
