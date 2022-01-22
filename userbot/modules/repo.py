@@ -68,7 +68,7 @@ async def killdabot(event):
 
 @register(outgoing=True, pattern=r"^\.readme$")
 async def reedme(e):
-    await e.edit("**Here's something for you to read:**\n" "\nOwner - Ryoishin")
+    await e.edit("**Dev's:**\n" "\nDevelopers - [Dev's](https://t.me/TheAlphonse/4)")
 
 
 # Copyright (c) Gegham Zakaryan | 2019
