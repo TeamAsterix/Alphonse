@@ -81,6 +81,9 @@ PM_AUTO_BAN = strtobool(os.environ.get("PM_AUTO_BAN", "False"))
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
 HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY")
 
+# Sudo Users.
+SUDO_USERS = os.environ.get("SUDO_USERS",  None)
+
 # Custom (forked) repo URL and BRANCH for updater.
 UPSTREAM_REPO_URL = "https://github.com/TeamAlphonse/Alphonse"
 UPSTREAM_REPO_BRANCH = "master"
