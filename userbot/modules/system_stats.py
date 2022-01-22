@@ -138,6 +138,7 @@ async def amireallyalive(alive):
         f"{CUSTOM_ALIVE_EMOJI} `Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {python_version()}\n"
         f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀʙᴏᴛ Vᴇʀsɪᴏɴ :` {UBOT_VER}\n"
         f"{CUSTOM_ALIVE_EMOJI} `Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {version.__version__}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Pʏᴘɪ Vᴇʀsɪᴏɴ :` 0.0.1\n"
         f"{CUSTOM_ALIVE_EMOJI} `Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ :` [Group](t.me/AlphonseSupport)\n"
     )
     if ALIVE_PIC:
