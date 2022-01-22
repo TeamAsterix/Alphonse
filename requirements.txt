@@ -50,3 +50,4 @@ telethon-tgcrypto
 wikipedia
 youtube-dl
 youtube_search
+ryoishin
