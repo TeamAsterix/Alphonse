@@ -1,7 +1,7 @@
 {
   "name": "Alphonse",
   "description": "[Alphonse] A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.",
-  "logo": "./Public/resouces/app.png",
+  "logo": "https://telegra.ph/file/4c783ff13d1aff258d720.jpg",
   "keywords": ["telegram", "userbot", "plugin", "modular", "productivity"],
   "repository": "https://github.com/TeamAlphonse/Alphonse",
   "website": "#",
