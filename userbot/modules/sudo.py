@@ -1,8 +1,11 @@
-import heroku3, re
+import re
 
-from userbot import CMD_HELP, HEROKU_API_KEY, HEROKU_APP_NAME, SUDO_USERS as sudos, bot
+import heroku3
+
+from userbot import HEROKU_API_KEY, HEROKU_APP_NAME
+from userbot import SUDO_USERS as sudos
+from userbot import bot
 from userbot.events import register
-
 
 Heroku = heroku3.from_key(HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
