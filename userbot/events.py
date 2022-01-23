@@ -1,20 +1,21 @@
 """ Userbot module for managing events.
  One of the main components of the userbot. """
 
-import re
 import inspect
-from pathlib import Path
+import re
 from asyncio import create_subprocess_shell as asyncsubshell
 from asyncio import subprocess as asyncsub
 from os import remove
+from pathlib import Path
 from sys import exc_info
 from time import gmtime, strftime
 from traceback import format_exc
 
 from telethon import events
 
-from . import CMD_HANDLER, SUDO_USERS, SUDO_LIST, SUDO_HANDLER
 from userbot import BOTLOG_CHATID, LOGS, LOGSPAMMER, bot
+
+from . import CMD_HANDLER, SUDO_HANDLER, SUDO_LIST, SUDO_USERS
 
 
 def is_chat_allowed(event_obj):
