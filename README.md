@@ -61,6 +61,7 @@ Thanks for using our bot
 ```
 
 ## Credits
-   - Special thanks to [LonamiWebs](https://github.com/LonamiWebs/Telethon/) for Telethon library.
-   - To all devs of these [Userbots](https://t.me/TheAlphonse/4)
-   - Finally to all [contributors of Alphonse](https://github.com/TeamAlphonse/Alphonse/graphs/contributors)
+   - Special thanks to [LonamiWebs](https://github.com/LonamiWebs/Telethon/) for Telethon library.💖
+   - To all devs of these [Userbots](https://t.me/TheAlphonse/4)❣️
+   - Finally to all [contributors of Alphonse](https://github.com/TeamAlphonse/Alphonse/graphs/contributors)❤️
+   
