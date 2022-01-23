@@ -29,7 +29,8 @@ A Powerful Telegram userbot based on Telethon .
  - Comming Soon
 
 ###  Deploy On Qovery
- - Comming Soon 
+
+ - - [![Deploy](https://img.shields.io/badge/Deploy-Qovery-purple)](https://www.qovery.com/)
 
 ## Telegram  Support 🏪
 - [![Telegram Group](https://img.shields.io/badge/Telegram-Group-brightgreen)](https://t.me/AlphonseSupport)
