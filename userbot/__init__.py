@@ -82,7 +82,7 @@ HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
 HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY")
 
 # Sudo Users.
-SUDO_USERS = os.environ.get("SUDO_USERS", None)
+SUDO_USERS = os.environ.get("SUDO_USERS",  None)
 
 # Custom (forked) repo URL and BRANCH for updater.
 UPSTREAM_REPO_URL = "https://github.com/TeamAlphonse/Alphonse"
@@ -187,6 +187,10 @@ GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN")
 
 # Uptobox
 USR_TOKEN = os.environ.get("USR_TOKEN_UPTOBOX")
+
+CMD_HANDLER = os.environ.get("CMD_HANDLER") or "."
+
+SUDO_HANDLER = os.environ.get("SUDO_HANDLER", r"!")
 
 
 def shutdown_bot(*_):
@@ -322,3 +326,5 @@ LASTMSG = {}
 CMD_HELP = {}
 ISAFK = False
 AFKREASON = None
+SUDO_LIST = {}
+CMD_LIST = {}

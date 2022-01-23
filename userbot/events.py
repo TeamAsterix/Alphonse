@@ -1,6 +1,9 @@
 """ Userbot module for managing events.
  One of the main components of the userbot. """
 
+import re
+import inspect
+from pathlib import Path
 from asyncio import create_subprocess_shell as asyncsubshell
 from asyncio import subprocess as asyncsub
 from os import remove
@@ -10,6 +13,7 @@ from traceback import format_exc
 
 from telethon import events
 
+from . import CMD_HANDLER, SUDO_USERS, SUDO_LIST, SUDO_HANDLER
 from userbot import BOTLOG_CHATID, LOGS, LOGSPAMMER, bot
 
 
@@ -24,6 +28,118 @@ def is_chat_allowed(event_obj):
         pass
 
     return True
+
+
+# Thanks for https://github.com/ULTRA-OP/ULTRA-X/
+def admin_cmd(pattern=None, command=None, **args):
+    args["func"] = lambda e: e.via_bot_id is None
+    stack = inspect.stack()
+    global SUDO_USERS
+    previous_stack_frame = stack[1]
+    file_test = Path(previous_stack_frame.filename)
+    file_test = file_test.stem.replace(".py", "")
+    allow_sudo = args.get("allow_sudo", False)
+    # get the pattern from the decorator
+    if pattern is not None:
+        if pattern.startswith(r"\#"):
+            # special fix for snip.py
+            args["pattern"] = re.compile(pattern)
+        elif pattern.startswith(r"^"):
+            args["pattern"] = re.compile(pattern)
+            cmd = pattern.replace("$", "").replace("^", "").replace("\\", "")
+            try:
+                CMD_LIST = {}[file_test].append(cmd)
+            except BaseException:
+                CMD_LIST = {}.update({file_test: [cmd]})
+        else:
+            if len(CMD_HANDLER) == 2:
+                catreg = "^" + CMD_HANDLER
+                reg = CMD_HANDLER[1]
+            elif len(CMD_HANDLER) == 1:
+                catreg = "^\\" + CMD_HANDLER
+                reg = CMD_HANDLER
+            args["pattern"] = re.compile(catreg + pattern)
+            if command is not None:
+                cmd = reg + command
+            else:
+                cmd = (
+                    (reg + pattern).replace("$", "").replace("\\", "").replace("^", "")
+                )
+            try:
+                CMD_LIST = {}[file_test].append(cmd)
+            except BaseException:
+                CMD_LIST = {}.update({file_test: [cmd]})
+
+    args["outgoing"] = True
+    # should this command be available for other users?
+    if allow_sudo:
+        args["from_users"] = list(SUDO_USERS)
+        # Mutually exclusive with outgoing (can only set one of either).
+        args["incoming"] = True
+        del args["allow_sudo"]
+
+    # error handling condition check
+    elif "incoming" in args and not args["incoming"]:
+        args["outgoing"] = True
+
+    # add blacklist chats, UB should not respond in these chats
+    if "allow_edited_updates" in args and args["allow_edited_updates"]:
+        del args["allow_edited_updates"]
+
+
+# Thanks for https://github.com/ULTRA-OP/ULTRA-X/
+def sudo_cmd(pattern=None, command=None, **args):
+    args["func"] = lambda e: e.via_bot_id is None
+    stack = inspect.stack()
+    previous_stack_frame = stack[1]
+    file_test = Path(previous_stack_frame.filename)
+    file_test = file_test.stem.replace(".py", "")
+    allow_sudo = args.get("allow_sudo", False)
+    # get the pattern from the decorator
+    if pattern is not None:
+        if pattern.startswith(r"\#"):
+            # special fix for snip.py
+            args["pattern"] = re.compile(pattern)
+        elif pattern.startswith(r"^"):
+            args["pattern"] = re.compile(pattern)
+            cmd = pattern.replace("$", "").replace("^", "").replace("\\", "")
+            try:
+                SUDO_LIST[file_test].append(cmd)
+            except BaseException:
+                SUDO_LIST.update({file_test: [cmd]})
+        else:
+            if len(SUDO_HANDLER) == 2:
+                mafiareg = "^" + SUDO_HANDLER
+                reg = SUDO_HANDLER[1]
+            elif len(SUDO_HANDLER) == 1:
+                mafiareg = "^\\" + SUDO_HANDLER
+                reg = SUDO_HANDLER
+            args["pattern"] = re.compile(mafiareg + pattern)
+            if command is not None:
+                cmd = reg + command
+            else:
+                cmd = (
+                    (reg + pattern).replace("$", "").replace("\\", "").replace("^", "")
+                )
+            try:
+                SUDO_LIST[file_test].append(cmd)
+            except BaseException:
+                SUDO_LIST.update({file_test: [cmd]})
+    args["outgoing"] = True
+    # should this command be available for other users?
+    if allow_sudo:
+        args["from_users"] = list(SUDO_USERS)
+        # Mutually exclusive with outgoing (can only set one of either).
+        args["incoming"] = True
+        del args["allow_sudo"]
+    # error handling condition check
+    elif "incoming" in args and not args["incoming"]:
+        args["outgoing"] = True
+
+    if "allow_edited_updates" in args and args["allow_edited_updates"]:
+        del args["allow_edited_updates"]
+    # check if the plugin should listen for outgoing 'messages'
+    return events.NewMessage(**args)
 
 
 def register(**args):
