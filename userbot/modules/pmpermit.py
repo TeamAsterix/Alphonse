@@ -19,7 +19,7 @@ from userbot.events import register
 # ========================= CONSTANTS ============================
 DEF_UNAPPROVED_MSG = (
     "Hey there! Unfortunately, I don't accept private messages from strangers.\n"
-    "Please contact me in a group, or wait for me to approve you."
+    "Please contact me in a group, or wait for me to approve you.\n © @TheAlphonse"
 )
 # =================================================================
 
