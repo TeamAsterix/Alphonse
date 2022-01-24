@@ -37,6 +37,15 @@ A Powerful Telegram userbot based on Telethon .
  
   - Soon Complete 
 
+## Variables
+
+- `APP_KEY`  =  Get this value from my.telegram.org
+- `API_HASH`  =  Get this value from my.telegram.org
+- `STRING_SESSION`  =  Get this by using Repl.it or from terminal.
+- `BOTLOG_CHATID`  =  Make A Private Chat And Get it's ID.
+- `DATABASE_URL`  =  A Postgresql database url.
+
+
 ## Telegram  Support 🏪
 - [![Telegram Group](https://img.shields.io/badge/Telegram-Group-brightgreen)](https://t.me/AlphonseSupport)
 - [![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-brightgreen)](https://t.me/AlphonseUpdates)
