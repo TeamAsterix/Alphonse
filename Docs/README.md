@@ -1,3 +1,3 @@
 # Redirect
- [Doc's](https://github.com/TeamAlphonse/Docs]❤️❤️
+ [Docs](https://github.com/TeamAlphonse/Docs]❤️❤️
  Comming Soon
