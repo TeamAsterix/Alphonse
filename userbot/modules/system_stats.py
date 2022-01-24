@@ -16,7 +16,6 @@ from userbot import (
     CMD_HELP,
     CUSTOM_ALIVE_EMOJI,
     CUSTOM_ALIVE_TEXT,
-    MENTION,
     UBOT_VER,
     StartTime,
     bot,
