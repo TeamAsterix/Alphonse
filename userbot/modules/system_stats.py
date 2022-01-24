@@ -133,7 +133,7 @@ async def amireallyalive(alive):
     uptime = await get_readable_time((time.time() - StartTime))
     output = (
         f"{CUSTOM_ALIVE_TEXT}\n\n"
-        f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀ :` {MENTION}\n"
+        f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀ :` {DEFAULTUSER}\n"
         f"{CUSTOM_ALIVE_EMOJI} `Uᴘᴛɪᴍᴇ :` {uptime}\n"
         f"{CUSTOM_ALIVE_EMOJI} `Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ :` {python_version()}\n"
         f"{CUSTOM_ALIVE_EMOJI} `Usᴇʀʙᴏᴛ Vᴇʀsɪᴏɴ :` {UBOT_VER}\n"
