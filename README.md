@@ -46,6 +46,29 @@ A Powerful Telegram userbot based on Telethon .
 - `BOTLOG_CHATID`  =  Make A Private Chat And Get it's ID.
 - `DATABASE_URL`  =  A Postgresql database url.
 
+## Session String
+- Open Repl Link.
+- Click on Green Play Button.
+- Wait for requirements to finish.
+- Fill API ID, API HASH, Phone number (with country code).
+- Paste the OTP received on Telegram.
+- If You have Enabled 2-Step Verification then fill your password.
+- Your HellBot Session Will be saved in your Telegram Saved Message.
+- There's a bug in repl which prints your input twice or more. You need to long tap and paste the required information in repl.
+- [![Run on Repl.it](https://replit.com/badge/github/TeamAlphonse/Alphonse)](https://replit.com/@ryoishin/Alphonse)
+
+### Generate String With Terminal
+- Open the terminal.
+- Paste this code.
+
+`pkg install python wget -y && pip install telethon && wget https://raw.githubusercontent.com/TeamAlphonse/Alphonse/master/string_session.py && python3 string_string.py`
+- Fill API ID, API HASH, Phone number (with country code).
+- Paste the OTP received on Telegram.
+- If You have Enabled 2-Step Verification then fill your password.
+- Note that Termux Doesn't show passwords when filled. Just paste your password and hit enter.
+- Your String Session Will be saved in your Telegram Saved Message.
+
+
 
 ## Telegram  Support 🏪
 - [![Telegram Group](https://img.shields.io/badge/Telegram-Group-brightgreen)](https://t.me/AlphonseSupport)
