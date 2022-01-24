@@ -163,7 +163,7 @@ async def amireallyaliveuser(username):
         newuser = message[8:]
         global DEFAULTUSER
         DEFAULTUSER = newuser
-    await username.edit(f"**Successfully changed user to** `{newuser}`**!**")
+        await username.edit(f"**Successfully changed user to** `{newuser}`**!**")
 
 
 @register(outgoing=True, pattern=r"^\.resetalive$")
