@@ -20,7 +20,7 @@ async def help(event):
     else:
         final = "**List of all loaded modules of Alphonse[🤖](https://telegra.ph/file/aaacd9d754a0a2b9c2522.jpg).**\n\
                  \nSpecify which module do you want help for! \
-                 \n**Usage:** `.help` <module name>\n\n"
+                 \n**Usage:** `.help` <module name>\n\n Support - @AlphonseSupport\n Updates - @AlphonseUpdates\n Dev's - [@TheAlphonse](https://t.me/TheAlphonse/4)\n\n"
 
         temp = "".join(str(i) + " " for i in CMD_HELP)
         temp = sorted(temp.split())
