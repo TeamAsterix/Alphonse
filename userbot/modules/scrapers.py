@@ -386,7 +386,7 @@ async def imdb(e):
         )
         page1 = get(mov_link)
         soup = BeautifulSoup(page1.content, "lxml")
-        if soup.find("div", "poster") and soup.find("div", "poster") is not None:
+        if soup.find("div", "poster") and soup.find("div", "poster").img is not None:
             poster = soup.find("div", "poster").img["src"]
         else:
             poster = ""
