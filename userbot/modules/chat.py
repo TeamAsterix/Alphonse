@@ -5,7 +5,7 @@ from asyncio import sleep
 from telethon import functions
 
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
-from userbot.events import register, admin_cmd
+from userbot.events import admin_cmd, register
 from userbot.modules.admin import get_user_from_event
 
 
@@ -45,7 +45,7 @@ async def permalink(mention):
 
 
 @register(admin_cmd(outgoing=True, pattern=r"^\.chatid$"))
-@register(sudo_cmd(outgoing=True, pattern=r"^\.chatid$", allow_sudo = True))
+@register(sudo_cmd(outgoing=True, pattern=r"^\.chatid$", allow_sudo=True))
 async def chatidgetter(chat):
     """For .chatid, returns the ID of the chat you are in at that moment."""
     await chat.edit("Chat ID: `" + str(chat.chat_id) + "`")
