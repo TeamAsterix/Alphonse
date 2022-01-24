@@ -1,2 +1,3 @@
-| Redirect [Doc's](GitHub.com/TeamAlphonse/Docs]
+> Redirect
+ [Doc's](GitHub.com/TeamAlphonse/Docs]
  Comming Soon
