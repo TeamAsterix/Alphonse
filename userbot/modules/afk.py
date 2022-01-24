@@ -37,7 +37,7 @@ AFKSTR = [
     "**I am not here right now...\nbut if I was...\n\nwouldn't that be awesome?**",
 ]
 # =================================================================
-
+COUNT_MSG = 0
 
 @register(incoming=True, disable_edited=True)
 async def mention_afk(mention):
