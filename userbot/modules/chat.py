@@ -44,7 +44,7 @@ async def permalink(mention):
         await mention.edit(f"[{tag}](tg://user?id={user.id})")
 
 
-@register(admin_cmd & sudo_cmd(outgoing=True, pattern=r"^\.chatid$", allow_sudo = True))
+@register(admin_cmd & sudo_cmd(outgoing=True, pattern=r"^\.chatid$", allow_sudo=True))
 async def chatidgetter(chat):
     """For .chatid, returns the ID of the chat you are in at that moment."""
     await chat.edit("Chat ID: `" + str(chat.chat_id) + "`")
