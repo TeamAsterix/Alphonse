@@ -192,7 +192,7 @@ def register(**args):
 
                     date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
-                    link = "[Issues](https://github.com/TeamAlphonse/Alphonse/issues)"
+                    link = "[Group](https://t.me/AlphonseSupport)"
                     text = (
                         "**ALPHONSE ERROR REPORT**\n"
                         "If you want to, you can report it"
