@@ -19,7 +19,8 @@ A Powerful Telegram userbot based on Telethon .
 ## How to deploy Alphonse
 
 # Tutorial 
- - Comming Soon
+ - Railway Deploy - [![Full Tutorial](https://img.shields.io/badge/Watch%20Now-blue)](https://youtu.be/UW8BS5Gag68)
+ - Heroku Comming Soon.
 
 ### Heroku Deploy
 
