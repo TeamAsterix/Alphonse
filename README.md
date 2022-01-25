@@ -18,6 +18,12 @@ A Powerful Telegram userbot based on Telethon .
 
 ## How to deploy Alphonse
 
+- [Deploy](#Heroku-Deploy)
+- [Locally](#Deploy-Locally)
+- [Railway](#Railway-Deploy)
+- [Qovery](#Deploy-on-Qovery)
+
+
 # Tutorial 
  - Railway Deploy - [![Full Tutorial](https://img.shields.io/badge/Watch%20Now-blue)](https://youtu.be/UW8BS5Gag68)
  - Heroku Comming Soon.
@@ -67,7 +73,7 @@ $ python(3) -m userbot
 - Fill API ID, API HASH, Phone number (with country code).
 - Paste the OTP received on Telegram.
 - If You have Enabled 2-Step Verification then fill your password.
-- Your HellBot Session Will be saved in your Telegram Saved Message.
+- Your String Session Will be saved in your Telegram Saved Message.
 - There's a bug in repl which prints your input twice or more. You need to long tap and paste the required information in repl.
 - [![Run on Repl.it](https://replit.com/badge/github/TeamAlphonse/Alphonse)](https://replit.com/@ryoishin/Alphonse)
 
