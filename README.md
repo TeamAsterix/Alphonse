@@ -18,6 +18,12 @@ A Powerful Telegram userbot based on Telethon .
 
 ## How to deploy Alphonse
 
+- [Deploy](#Heroku-Deploy)
+- [Locally](#Deploy-Locally)
+- [Railway](#Railway-Deploy)
+- [Qovery](#Deploy-on-Qovery)
+
+
 # Tutorial 
  - Railway Deploy - [![Full Tutorial](https://img.shields.io/badge/Watch%20Now-blue)](https://youtu.be/UW8BS5Gag68)
  - Heroku Comming Soon.
