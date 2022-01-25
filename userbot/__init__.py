@@ -1,6 +1,7 @@
 #
 """ Userbot initialization. """
 
+
 import os
 import signal
 import sys
@@ -26,10 +27,9 @@ STORAGE = lambda n: Storage(Path("data") / n)
 
 load_dotenv("config.env")
 
-# Bot Logs setup:
-CONSOLE_LOGGER_VERBOSE = strtobool(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
-
-if CONSOLE_LOGGER_VERBOSE:
+if CONSOLE_LOGGER_VERBOSE := strtobool(
+    os.environ.get("CONSOLE_LOGGER_VERBOSE", "False")
+):
     basicConfig(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         level=DEBUG,
@@ -48,13 +48,9 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 9:
     )
     sys.exit(1)
 
-# Check if the config was edited by using the already used variable.
-# Basically, its the 'virginity check' for the config file ;)
-CONFIG_CHECK = os.environ.get(
+if CONFIG_CHECK := os.environ.get(
     "___________PLOX_______REMOVE_____THIS_____LINE__________"
-)
-
-if CONFIG_CHECK:
+):
     LOGS.info(
         "Please remove the line mentioned in the first hashtag from the config.env file"
     )
@@ -115,9 +111,7 @@ ANTI_SPAMBOT_SHOUT = strtobool(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
 # Default .alive name
 ALIVE_NAME = "Master"
 
-# Owner id to show profile link of given id as owner
-OWNER_ID = os.environ.get("OWNER_ID", None)
-if OWNER_ID:
+if OWNER_ID := os.environ.get("OWNER_ID", None):
     OWNER_ID = int(OWNER_ID)
 
 # Default .alive pic
