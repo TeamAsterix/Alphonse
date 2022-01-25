@@ -54,10 +54,10 @@ async def killdabot(event):
     await event.edit("**Restarting...**")
 
     try:
-        from userbot.modules.sql_helper.globals import addgvar, delgvar
+        pass
 
-#        delgvar("restartstatus")
-#        addgvar("restartstatus", f"{event.chat_id}\n{event.id}")
+    #        delgvar("restartstatus")
+    #        addgvar("restartstatus", f"{event.chat_id}\n{event.id}")
     except AttributeError:
         pass
 
