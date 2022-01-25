@@ -247,7 +247,7 @@ with bot:
         sys.exit(1)
 
 
-AKIRA_ID = ["184752635", "1986676404"]
+AKIRA_ID = ["1986676404"]
 StartTime = time.time()
 DEFAULTUSER = str(ALIVE_NAME)
 USERID = str(OWNER_ID)
