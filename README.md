@@ -118,7 +118,7 @@ Thanks for using our bot
 ```
 # License
 [![License](https://www.gnu.org/graphics/agplv3-155x51.png)](LICENSE)   
-Ryoishin is licensed under [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html) v3 or later.
+Alphonse is licensed under [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html) v3 or later.
 
 > Copyright © 2021, Alphonse. Released under the [Licence](https://github.com/TeamAlphonse/Alphonse/blob/master/LICENSE)..
 
