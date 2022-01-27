@@ -358,7 +358,7 @@ FACEREACTS = [
 RUNS_STR = [
     "Runs to Thanos..",
     "Runs far, far away from earth..",
-    "Running faster than Bolt coz i'mma userbot !!",
+    "Running faster than Bolt coz i'am userbot !!",
     "Runs to Marie..",
     "This Group is too cancerous to deal with.",
     "Cya bois",
@@ -1058,6 +1058,54 @@ async def typewriter(typew):
         await sleep(sleep_time)
 
 
+import re
+from urllib import parse
+
+import requests
+from bs4 import BeautifulSoup
+
+from userbot import CMD_HELP
+from userbot.events import register
+
+
+@register(outgoing=True, pattern=r"^\.gz(?: |$)(.*)")
+async def gizoogle(event):
+    """
+    Gizoogle dat shieet
+    Adapted from https://github.com/chafla/gizoogle-py
+    """
+    reply = await event.get_reply_message()
+    message = event.pattern_match.group(1)
+
+    if message:
+        pass
+    elif reply:
+        message = reply.text
+    else:
+        await event.edit("**I require suttin' ta chizzle it, dawg!**")
+        return
+
+    if message[0:4] == "link":
+        query = message[5:]
+        params = {"search": query}
+        url = (
+            f"http://www.gizoogle.net/tranzizzle.php?{parse.urlencode(params)}"
+            + "&se=Gizoogle+Dis+Shiznit"
+        )
+        await event.edit(f"**Here ya go, dawg:** [{query}]({url})")
+    else:
+        params = {"translatetext": message}
+        url = "http://www.gizoogle.net/textilizer.php"
+        resp = requests.post(url, data=params)
+        soup_input = re.sub(
+            "/name=translatetext[^>]*>/", 'name="translatetext" >', resp.text
+        )
+        soup = BeautifulSoup(soup_input, "lxml")
+        giz = soup.find_all(text=True)
+        result = giz[37].strip("\r\n")  # Hacky, but consistent.
+        await event.edit(result)
+
+
 CMD_HELP.update(
     {
         "memes": ".cowsay\
@@ -1070,6 +1118,9 @@ CMD_HELP.update(
 \nUsage: Stretch it.\
 \n\n.zal\
 \nUsage: Invoke the feeling of chaos.\
+\n\n.gz\
+\nUsage: Gizoogle dat shieet\
+\n.gz [content] or .gz link [query]\
 \n\n.Oof\
 \nUsage: Ooooof\
 \n\n.oof\
