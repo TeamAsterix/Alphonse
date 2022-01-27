@@ -668,9 +668,7 @@ async def slap(replied_user, event):
     """Construct a funny slap sentence !!"""
     user_id = replied_user.id
     first_name = replied_user.first_name
-    username = replied_user.username
-
-    if username:
+    if username := replied_user.username:
         slapped = f"@{username}"
     else:
         slapped = f"[{first_name}](tg://user?id={user_id})"
@@ -974,8 +972,7 @@ async def payf(event):
 @register(outgoing=True, pattern=r"^\.lfy (.*)")
 async def let_me_google_that_for_you(lmgtfy_q):
     textx = await lmgtfy_q.get_reply_message()
-    qry = lmgtfy_q.pattern_match.group(1)
-    if qry:
+    if qry := lmgtfy_q.pattern_match.group(1):
         query = str(qry)
     elif textx:
         query = textx
@@ -1085,7 +1082,7 @@ async def gizoogle(event):
         await event.edit("**I require suttin' ta chizzle it, dawg!**")
         return
 
-    if message[0:4] == "link":
+    if message[:4] == "link":
         query = message[5:]
         params = {"search": query}
         url = (
