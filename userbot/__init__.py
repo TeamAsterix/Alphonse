@@ -85,7 +85,7 @@ HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY")
 SUDO_USERS = os.environ.get("SUDO_USERS", None)
 
 # Custom (forked) repo URL and BRANCH for updater.
-UPSTREAM_REPO_URL = "https://github.com/TeamAlphonse/Alphonse"
+UPSTREAM_REPO_URL = "https://github.com/Ryoishin/Alphonse"
 UPSTREAM_REPO_BRANCH = "master"
 
 # Console verbose logging
