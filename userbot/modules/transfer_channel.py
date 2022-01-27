@@ -1,14 +1,16 @@
+# Credit Cat Userbot
+# Port By Ryoishin
+
 import telethon.password as pwd_mod
 from telethon.tl import functions
 
-from userbot import register
+from userbot.events import register
 
-from ..Config import Config
 
 plugin_category = "utils"
 
 
-@register.cat_cmd(
+@register(
     pattern="otransfer ([\s\S]*)",
     command=("otransfer", plugin_category),
     info={
