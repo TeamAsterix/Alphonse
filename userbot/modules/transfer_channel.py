@@ -6,7 +6,6 @@ from telethon.tl import functions
 
 from userbot.events import register
 
-
 plugin_category = "utils"
 
 
