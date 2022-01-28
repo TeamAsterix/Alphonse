@@ -4,7 +4,7 @@ import logging
 import os
 import time
 import re
-__import__ redis
+import redis
 import random
 
 from sys import version_info
