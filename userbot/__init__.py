@@ -13,9 +13,9 @@ from sys import version_info
 
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
-from pymongo import MongoClient
+
 from pySmartDL import SmartDL
-from redis import StrictRedis
+
 from requests import get
 from telethon import Button, events, functions, types
 from telethon.sessions import StringSession
