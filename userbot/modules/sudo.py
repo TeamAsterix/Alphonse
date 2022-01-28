@@ -4,7 +4,7 @@ import heroku3
 
 from userbot import HEROKU_API_KEY, HEROKU_APP_NAME
 from userbot import SUDO_USERS as sudos
-from userbot import bot
+from userbot import CMD_HANDLER, bot
 from userbot.events import register
 
 Heroku = heroku3.from_key(HEROKU_API_KEY)
