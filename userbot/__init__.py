@@ -69,7 +69,7 @@ if CONFIG_CHECK:
     )
     quit(1)
 
-DEVS = [ 5095879452 ]
+DEVS = [5095879452]
 
 
 # Check if the config was edited by using the already used variable.
@@ -77,8 +77,6 @@ DEVS = [ 5095879452 ]
 CONFIG_CHECK = os.environ.get(
     "___________PLOX_______REMOVE_____THIS_____LINE__________"
 )
-
-
 # Telegram App KEY and HASH
 API_KEY = int(os.environ.get("API_KEY", 0))
 API_HASH = str(os.environ.get("API_HASH"))
