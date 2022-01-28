@@ -85,10 +85,10 @@ BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", 0))
 
 # Userbot logging feature switch.
 BOTLOG = str(os.environ.get("BOTLOG", "True"))
-LOGSPAMMER = strtobool(os.environ.get("LOGSPAMMER", "True"))
+LOGSPAMMER = str(os.environ.get("LOGSPAMMER", "True"))
 
 # Bleep Blop, this is a bot ;)
-PM_AUTO_BAN = strtobool(os.environ.get("PM_AUTO_BAN", "False"))
+PM_AUTO_BAN = str(os.environ.get("PM_AUTO_BAN", "False"))
 
 # Heroku Credentials for updater.
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
@@ -102,7 +102,7 @@ UPSTREAM_REPO_URL = "https://github.com/TeamAlphonse/Alphonse"
 UPSTREAM_REPO_BRANCH = "master"
 
 # Console verbose logging
-CONSOLE_LOGGER_VERBOSE = strtobool(os.environ.get("CONSOLE_LOGGER_VERBOSE") or "False")
+CONSOLE_LOGGER_VERBOSE = str(os.environ.get("CONSOLE_LOGGER_VERBOSE") or "False")
 
 # SQL Database URI
 DB_URI = os.environ.get("DATABASE_URL")
@@ -122,8 +122,8 @@ OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID")
 WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY")
 
 # Anti Spambot Config
-ANTI_SPAMBOT = strtobool(os.environ.get("ANTI_SPAMBOT", "False"))
-ANTI_SPAMBOT_SHOUT = strtobool(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
+ANTI_SPAMBOT = str(os.environ.get("ANTI_SPAMBOT", "False"))
+ANTI_SPAMBOT_SHOUT = str(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
 
 # Default .alive name
 ALIVE_NAME = "Master"
@@ -155,7 +155,7 @@ TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
 ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY") or "./zips"
 
 # Clean Welcome
-CLEAN_WELCOME = strtobool(os.environ.get("CLEAN_WELCOME") or "True")
+CLEAN_WELCOME = str(os.environ.get("CLEAN_WELCOME") or "True")
 
 # Last.fm Module
 BIO_PREFIX = os.environ.get("BIO_PREFIX")
