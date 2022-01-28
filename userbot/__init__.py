@@ -1,43 +1,30 @@
-""" Userbot initialization. """
-
-import logging
 import os
+import signal
+import sys
 import time
-import re
-import redis
-import random
+from asyncio import create_subprocess_exec as asyncrunapp
+from asyncio.subprocess import PIPE as asyncPIPE
+from distutils.util import strtobool
+from logging import DEBUG, INFO, basicConfig, getLogger
+from os import remove
+from pathlib import Path
+from platform import python_version
 
-from sys import version_info
-from logging import basicConfig, getLogger, INFO, DEBUG
-from distutils.util import strtobool as sb
-from math import ceil
-
-from pylast import LastFMNetwork, md5
-from pySmartDL import SmartDL
-from pymongo import MongoClient
-from datetime import datetime
-from redis import StrictRedis
 from dotenv import load_dotenv
-from requests import get
-from telethon.sync import TelegramClient, custom, events
+from pylast import LastFMNetwork, md5
+from telethon import TelegramClient, version
+from telethon.errors.rpcerrorlist import MediaEmptyError
+from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 from telethon.sessions import StringSession
-from telethon import Button, events, functions, types
-from telethon.utils import get_display_name
 
-redis_db = None
+from .storage import Storage
+
+STORAGE = lambda n: Storage(Path("data") / n)
 
 load_dotenv("config.env")
 
-StartTime = time.time()
-
-CMD_LIST = {}
-# for later purposes
-CMD_HELP = {}
-INT_PLUG = ""
-LOAD_PLUG = {}
-
 # Bot Logs setup:
-CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
+CONSOLE_LOGGER_VERBOSE = strtobool(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 
 if CONSOLE_LOGGER_VERBOSE:
     basicConfig(
@@ -48,35 +35,40 @@ else:
     basicConfig(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=INFO
     )
+
 LOGS = getLogger(__name__)
 
-if version_info[0] < 3 or version_info[1] < 8:
+if sys.version_info[0] < 3 or sys.version_info[1] < 9:
     LOGS.info(
-        "You MUST have a python version of at least 3.8."
+        "You MUST have a python version of at least 3.9."
         "Multiple features depend on this. Bot quitting."
     )
-    quit(1)
-
-# Check if the config was edited by using the already used variable.
-# Basically, its the 'virginity check' for the config file ;)
-CONFIG_CHECK = os.environ.get(
-    "___________PLOX_______REMOVE_____THIS_____LINE__________", None
-)
-
-if CONFIG_CHECK:
-    LOGS.info(
-        "Please remove the line mentioned in the first hashtag from the config.env file"
-    )
-    quit(1)
-
-DEVS = [5095879452]
-
+    sys.exit(1)
 
 # Check if the config was edited by using the already used variable.
 # Basically, its the 'virginity check' for the config file ;)
 CONFIG_CHECK = os.environ.get(
     "___________PLOX_______REMOVE_____THIS_____LINE__________"
 )
+
+if CONFIG_CHECK:
+    LOGS.info(
+        "Please remove the line mentioned in the first hashtag from the config.env file"
+    )
+    sys.exit(1)
+
+# Check if the config was edited by using the already used variable.
+# Basically, its the 'virginity check' for the config file ;)
+CONFIG_CHECK = os.environ.get(
+    "___________PLOX_______REMOVE_____THIS_____LINE__________"
+)
+
+if CONFIG_CHECK:
+    LOGS.info(
+        "Please remove the line mentioned in the first hashtag from the config.env file"
+    )
+    sys.exit(1)
+
 # Telegram App KEY and HASH
 API_KEY = int(os.environ.get("API_KEY", 0))
 API_HASH = str(os.environ.get("API_HASH"))
@@ -124,6 +116,7 @@ CHROME_BIN = "/usr/bin/chromium"
 # OpenWeatherMap API Key
 OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID")
 WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY")
+
 
 # Anti Spambot Config
 ANTI_SPAMBOT = strtobool(os.environ.get("ANTI_SPAMBOT", "False"))
@@ -183,6 +176,7 @@ if LASTFM_API and LASTFM_SECRET and LASTFM_USERNAME and LASTFM_PASS:
     except Exception:
         pass
 
+
 # Google Drive Module
 G_DRIVE_DATA = os.environ.get("G_DRIVE_DATA")
 G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID")
@@ -204,10 +198,6 @@ GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN")
 
 # Uptobox
 USR_TOKEN = os.environ.get("USR_TOKEN_UPTOBOX")
-
-CMD_HANDLER = os.environ.get("CMD_HANDLER") or "."
-
-SUDO_HANDLER = os.environ.get("SUDO_HANDLER", r"!")
 
 
 def shutdown_bot(*_):
@@ -252,7 +242,6 @@ async def check_botlog_chatid():
         )
         sys.exit(1)
 
-
 with bot:
     try:
         bot.loop.run_until_complete(check_botlog_chatid())
@@ -264,7 +253,7 @@ with bot:
         sys.exit(1)
 
 
-AKIRA_ID = ["1986676404"]
+AKIRA_ID = [184752635, 1986676404]
 StartTime = time.time()
 DEFAULTUSER = str(ALIVE_NAME)
 USERID = str(OWNER_ID)
@@ -294,7 +283,6 @@ async def get_readable_time(seconds: int) -> str:
     up_time += ":".join(time_list)
 
     return up_time
-
 
 async def update_restart_msg(chat_id, msg_id):
     img = ALIVE_PIC
@@ -343,5 +331,3 @@ LASTMSG = {}
 CMD_HELP = {}
 ISAFK = False
 AFKREASON = None
-SUDO_LIST = {}
-CMD_LIST = {}
