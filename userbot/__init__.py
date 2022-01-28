@@ -1,37 +1,33 @@
+#
 """ Userbot initialization. """
 
-import logging
 import os
-import random
-import re
+import signal
+import sys
 import time
-from datetime import datetime
-from distutils.util import strtobool as sb
+from asyncio import create_subprocess_exec as asyncrunapp
+from asyncio.subprocess import PIPE as asyncPIPE
+from distutils.util import strtobool
 from logging import DEBUG, INFO, basicConfig, getLogger
-from math import ceil
-from sys import version_info
+from os import remove
+from pathlib import Path
+from platform import python_version
 
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
-from pySmartDL import SmartDL
-from requests import get
-from telethon import Button, events, functions, types
+from telethon import TelegramClient, version
+from telethon.errors.rpcerrorlist import MediaEmptyError
+from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 from telethon.sessions import StringSession
-from telethon.sync import TelegramClient, custom, events
-from telethon.utils import get_display_name
+
+from .storage import Storage
+
+STORAGE = lambda n: Storage(Path("data") / n)
 
 load_dotenv("config.env")
 
-StartTime = time.time()
-
-CMD_LIST = {}
-# for later purposes
-CMD_HELP = {}
-INT_PLUG = ""
-LOAD_PLUG = {}
-
 # Bot Logs setup:
-CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
+CONSOLE_LOGGER_VERBOSE = strtobool(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 
 if CONSOLE_LOGGER_VERBOSE:
     basicConfig(
@@ -42,29 +38,15 @@ else:
     basicConfig(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=INFO
     )
+
 LOGS = getLogger(__name__)
 
-if version_info[0] < 3 or version_info[1] < 8:
+if sys.version_info[0] < 3 or sys.version_info[1] < 9:
     LOGS.info(
-        "You MUST have a python version of at least 3.8."
+        "You MUST have a python version of at least 3.9."
         "Multiple features depend on this. Bot quitting."
     )
-    quit(1)
-
-# Check if the config was edited by using the already used variable.
-# Basically, its the 'virginity check' for the config file ;)
-CONFIG_CHECK = os.environ.get(
-    "___________PLOX_______REMOVE_____THIS_____LINE__________", None
-)
-
-if CONFIG_CHECK:
-    LOGS.info(
-        "Please remove the line mentioned in the first hashtag from the config.env file"
-    )
-    quit(1)
-
-DEVS = (5095879452,)
-
+    sys.exit(1)
 
 # Check if the config was edited by using the already used variable.
 # Basically, its the 'virginity check' for the config file ;)
@@ -72,6 +54,11 @@ CONFIG_CHECK = os.environ.get(
     "___________PLOX_______REMOVE_____THIS_____LINE__________"
 )
 
+if CONFIG_CHECK:
+    LOGS.info(
+        "Please remove the line mentioned in the first hashtag from the config.env file"
+    )
+    sys.exit(1)
 
 # Telegram App KEY and HASH
 API_KEY = int(os.environ.get("API_KEY", 0))
@@ -84,11 +71,11 @@ STRING_SESSION = os.environ.get("STRING_SESSION")
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", 0))
 
 # Userbot logging feature switch.
-BOTLOG = str(os.environ.get("BOTLOG", "True"))
-LOGSPAMMER = str(os.environ.get("LOGSPAMMER", "True"))
+BOTLOG = strtobool(os.environ.get("BOTLOG", "True"))
+LOGSPAMMER = strtobool(os.environ.get("LOGSPAMMER", "True"))
 
 # Bleep Blop, this is a bot ;)
-PM_AUTO_BAN = str(os.environ.get("PM_AUTO_BAN", "False"))
+PM_AUTO_BAN = strtobool(os.environ.get("PM_AUTO_BAN", "False"))
 
 # Heroku Credentials for updater.
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
@@ -102,7 +89,7 @@ UPSTREAM_REPO_URL = "https://github.com/TeamAlphonse/Alphonse"
 UPSTREAM_REPO_BRANCH = "master"
 
 # Console verbose logging
-CONSOLE_LOGGER_VERBOSE = str(os.environ.get("CONSOLE_LOGGER_VERBOSE") or "False")
+CONSOLE_LOGGER_VERBOSE = strtobool(os.environ.get("CONSOLE_LOGGER_VERBOSE") or "False")
 
 # SQL Database URI
 DB_URI = os.environ.get("DATABASE_URL")
@@ -122,8 +109,8 @@ OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID")
 WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY")
 
 # Anti Spambot Config
-ANTI_SPAMBOT = str(os.environ.get("ANTI_SPAMBOT", "False"))
-ANTI_SPAMBOT_SHOUT = str(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
+ANTI_SPAMBOT = strtobool(os.environ.get("ANTI_SPAMBOT", "False"))
+ANTI_SPAMBOT_SHOUT = strtobool(os.environ.get("ANTI_SPAMBOT_SHOUT", "False"))
 
 # Default .alive name
 ALIVE_NAME = "Master"
@@ -155,7 +142,7 @@ TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
 ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY") or "./zips"
 
 # Clean Welcome
-CLEAN_WELCOME = str(os.environ.get("CLEAN_WELCOME") or "True")
+CLEAN_WELCOME = strtobool(os.environ.get("CLEAN_WELCOME") or "True")
 
 # Last.fm Module
 BIO_PREFIX = os.environ.get("BIO_PREFIX")
@@ -260,7 +247,7 @@ with bot:
         sys.exit(1)
 
 
-AKIRA_ID = ["1986676404"]
+AKIRA_ID = ["184752635", "1986676404"]
 StartTime = time.time()
 DEFAULTUSER = str(ALIVE_NAME)
 USERID = str(OWNER_ID)
