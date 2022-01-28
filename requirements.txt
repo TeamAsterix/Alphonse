@@ -51,3 +51,4 @@ wikipedia
 youtube-dl
 youtube_search
 ryoishin
+redis
