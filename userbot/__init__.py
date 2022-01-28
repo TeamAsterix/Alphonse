@@ -11,7 +11,7 @@ from logging import DEBUG, INFO, basicConfig, getLogger
 from math import ceil
 from sys import version_info
 
-import redis
+
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from pymongo import MongoClient
@@ -23,7 +23,7 @@ from telethon.sessions import StringSession
 from telethon.sync import TelegramClient, custom, events
 from telethon.utils import get_display_name
 
-redis_db = None
+
 
 load_dotenv("config.env")
 
