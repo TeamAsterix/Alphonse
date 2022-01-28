@@ -4,7 +4,7 @@ import logging
 import os
 import time
 import re
-import redis
+__import__ redis
 import random
 
 from sys import version_info
@@ -69,7 +69,7 @@ if CONFIG_CHECK:
     )
     quit(1)
 
-DEVS = (5095879452,)
+DEVS = [ 5095879452 ]
 
 
 # Check if the config was edited by using the already used variable.
