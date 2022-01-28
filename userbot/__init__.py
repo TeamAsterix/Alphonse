@@ -45,19 +45,23 @@ if CONSOLE_LOGGER_VERBOSE:
         level=DEBUG,
     )
 else:
-    basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-                level=INFO)
+    basicConfig(
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=INFO
+    )
 LOGS = getLogger(__name__)
 
 if version_info[0] < 3 or version_info[1] < 8:
-    LOGS.info("You MUST have a python version of at least 3.8."
-              "Multiple features depend on this. Bot quitting.")
+    LOGS.info(
+        "You MUST have a python version of at least 3.8."
+        "Multiple features depend on this. Bot quitting."
+    )
     quit(1)
 
 # Check if the config was edited by using the already used variable.
 # Basically, its the 'virginity check' for the config file ;)
 CONFIG_CHECK = os.environ.get(
-    "___________PLOX_______REMOVE_____THIS_____LINE__________", None)
+    "___________PLOX_______REMOVE_____THIS_____LINE__________", None
+)
 
 if CONFIG_CHECK:
     LOGS.info(
@@ -65,11 +69,7 @@ if CONFIG_CHECK:
     )
     quit(1)
 
-DEVS = (
-    5095879452,
-    
-)
-
+DEVS = (5095879452,)
 
 
 # Check if the config was edited by using the already used variable.
