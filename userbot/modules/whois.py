@@ -1,4 +1,3 @@
-""" Userbot module for getting info about any user on Telegram(including you!). """
 
 import os
 
@@ -7,16 +6,15 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
-from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
-from userbot.events import register
+from userbot import CMD_HANDLER as cmd
+from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
+from userbot.events import alphonse_cmd
 
 
-@register(pattern=r"\.whois(?: |$)(.*)", outgoing=True)
+@bot.on(alphonse_cmd(pattern=r"whois(?: |$)(.*)", outgoing=True))
 async def who(event):
 
-    await event.edit(
-        "**Sit tight while I steal some data from the Global Network Zone...**"
-    )
+    await event.edit("`Retrieving This User's Information...`")
 
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
@@ -24,13 +22,13 @@ async def who(event):
     replied_user = await get_user(event)
     if replied_user is None:
         return await event.edit(
-            "**Well that's an anonymous admin, good luck figuring out which one!**"
+            "**that's anonymous admin, good luck finding out which one!**"
         )
 
     try:
         photo, caption = await fetch_info(replied_user, event)
     except AttributeError:
-        return await event.edit("**Couldn't fetch the info of this user.**")
+        return await event.edit("**I Don't Get Any Information.**")
 
     message_id_to_reply = event.message.reply_to_msg_id
 
@@ -99,7 +97,7 @@ async def fetch_info(replied_user, event):
         )
     )
     replied_user_profile_photos_count = (
-        "Person needs help with uploading profile picture."
+        "The person needs help uploading a profile picture."
     )
     try:
         replied_user_profile_photos_count = replied_user_profile_photos.count
@@ -111,7 +109,7 @@ async def fetch_info(replied_user, event):
     try:
         dc_id, _ = get_input_location(replied_user.profile_photo)
     except Exception as e:
-        dc_id = "Couldn't fetch DC ID!"
+        dc_id = "Unable to Retrieve DC ID!"
         str(e)
     common_chat = replied_user.common_chats_count
     username = replied_user.user.username
@@ -122,38 +120,37 @@ async def fetch_info(replied_user, event):
     photo = await event.client.download_profile_photo(
         user_id, TEMP_DOWNLOAD_DIRECTORY + str(user_id) + ".jpg", download_big=True
     )
-    first_name = (
-        first_name.replace("\u2060", "")
-        if first_name
-        else ("This User has no First Name")
+   first_name = (
+        first_name.replace("\u2060", "") if first_name else ("No First Name")
     )
     last_name = (
-        last_name.replace("\u2060", "") if last_name else ("This User has no Last Name")
+        last_name.replace("\u2060", "") if last_name else ("No Last Name")
     )
-    username = f"@{username}" if username else ("This User has no Username")
-    user_bio = "This User has no About" if not user_bio else user_bio
+    username = f"@{username}" if username else ("Not Using Username")
+    user_bio = "Not Using Bio" if not user_bio else user_bio
 
-    caption = "<b>USER INFO:</b>\n\n"
-    caption += f"First Name: {first_name}\n"
-    caption += f"Last Name: {last_name}\n"
-    caption += f"Username: {username}\n"
-    caption += f"Data Centre ID: {dc_id}\n"
-    caption += f"Number of Profile Pics: {replied_user_profile_photos_count}\n"
-    caption += f"Is Bot: {is_bot}\n"
-    caption += f"Is Restricted: {restricted}\n"
-    caption += f"Is Verified by Telegram: {verified}\n"
-    caption += f"ID: <code>{user_id}</code>\n\n"
-    caption += f"Bio: \n<code>{user_bio}</code>\n\n"
-    caption += f"Common Chats with this user: {common_chat}\n"
-    caption += "Permanent Link To Profile: "
+    caption = "<b>USER INFORMATION :</b>\n\n"
+    caption += f"First Name : {first_name}\n"
+    caption += f"Last Name : {last_name}\n"
+    caption += f"Username : {username}\n"
+    caption += f"Data Center ID : {dc_id}\n"
+    caption += f"Total Profile Photos : {replied_user_profile_photos_count}\n"
+    caption += f"What is Bot : {is_bot}\n"
+    caption += f"Are Restricted : {restricted}\n"
+    caption += f"Verified By Telegram : {verified}\n"
+    caption += f"User ID : <code>{user_id}</code>\n\n"
+    caption += f"Bio : <code>{user_bio}</code>\n\n"
+    caption += f"Same group as this user : {common_chat}\n"
+    caption += "Permanent Link To Profile : "
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-
     return photo, caption
 
 
 CMD_HELP.update(
-    {
-        "whois": ">`.whois <username> or reply to someones text with .whois`"
-        "\nUsage: Gets info of an user."
+{
+        "whois": f"**Plugin : **`whois`\
+        \n\n • **Syntax :** `{cmd}whois` <username> Or Reply To User Message Type `.whois`\
+        \n • **Function : **Get User Information.\
+    "
     }
 )

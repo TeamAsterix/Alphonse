@@ -1,9 +1,9 @@
 FROM ryoishin/alphonse:debian
 
-RUN set -ex \
-    && git clone -b master https://github.com/TeamAlphonse/Alphonse /root/userbot \
-    && chmod 777 /root/userbot
+RUN git clone -b Alphonse https://github.com/TeamAlphonse/Alphonse /home/Alphonse/ \
+    && chmod 777 /home/alphonse \
+    && mkdir /home/alphonse/bin/
 
-WORKDIR /root/userbot/
+WORKDIR /home/alphonse/
 
-CMD ["python3", "-m", "userbot"]
+CMD [ "bash", "start" ]

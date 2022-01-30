@@ -1,5 +1,3 @@
-""" Userbot module for getting the weather of a city. """
-
 import json
 from datetime import datetime
 
@@ -8,10 +6,11 @@ from pytz import country_timezones as c_tz
 from pytz import timezone as tz
 from requests import get
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
 from userbot import OPEN_WEATHER_MAP_APPID as OWM_API
-from userbot import WEATHER_DEFCITY
-from userbot.events import register
+from userbot import WEATHER_DEFCITY, bot
+from userbot.events import alphonse_cmd
 
 # ===== CONSTANT =====
 DEFCITY = WEATHER_DEFCITY or None
@@ -20,7 +19,7 @@ DEFCITY = WEATHER_DEFCITY or None
 # ====================
 async def get_tz(con):
     """Get time zone of the given country."""
-    """ Credits: @Koyocoder and @Ryoishin. """
+""" Credits: @aragon12 and @zakaryan2004. """
     for c_code in c_n:
         if con == c_n[c_code]:
             return tz(c_tz[c_code][0])
@@ -31,14 +30,14 @@ async def get_tz(con):
         return
 
 
-@register(outgoing=True, pattern=r"^\.weather(?: |$)(.*)")
+@bot.on(alphonse_cmd(outgoing=True, pattern=r"weather(?: |$)(.*)"))
 async def get_weather(weather):
     """For .weather command, gets the current weather of a city."""
 
     if not OWM_API:
         return await weather.edit(
             "**Get an API key from** https://openweathermap.org **first.**"
-        )
+)
 
     APPID = OWM_API
 
@@ -52,7 +51,7 @@ async def get_weather(weather):
     else:
         CITY = weather.pattern_match.group(1)
 
-    if not CITY:
+if not CITY:
         return await weather.edit(
             "**Please specify a city or set one as default using the WEATHER_DEFCITY config variable.**"
         )
@@ -60,7 +59,7 @@ async def get_weather(weather):
     timezone_countries = {
         timezone: country
         for country, timezones in c_tz.items()
-        for timezone in timezones
+for timezone in timezones
     }
 
     if "," in CITY:
@@ -70,22 +69,22 @@ async def get_weather(weather):
         else:
             country = await get_tz((newcity[1].strip()).title())
             try:
-                countrycode = timezone_countries[f"{country}"]
+countrycode = timezone_countries[f"{country}"]
             except KeyError:
-                return await weather.edit("**Invalid country.**")
+                return await weather.edit("`Invalid country.`")
             CITY = newcity[0].strip() + "," + countrycode.strip()
 
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={APPID}"
+    url=f"https://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={APPID}"
     request = get(url)
     result = json.loads(request.text)
 
     if request.status_code != 200:
-        return await weather.edit("**Invalid country.**")
+        return await weather.edit("`Invalid country.`")
 
     cityname = result["name"]
     curtemp = result["main"]["temp"]
     humidity = result["main"]["humidity"]
-    min_temp = result["main"]["temp_min"]
+min_temp = result["main"]["temp_min"]
     max_temp = result["main"]["temp_max"]
     desc = result["weather"][0]
     desc = desc["main"]
@@ -93,7 +92,7 @@ async def get_weather(weather):
     sunrise = result["sys"]["sunrise"]
     sunset = result["sys"]["sunset"]
     wind = result["wind"]["speed"]
-    winddir = result["wind"]["deg"]
+winddir = result["wind"]["deg"]
 
     ctimezone = tz(c_tz[country][0])
     time = datetime.now(ctimezone).strftime("%A, %I:%M %p")
@@ -103,7 +102,7 @@ async def get_weather(weather):
 
     div = 360 / len(dirs)
     funmath = int((winddir + (div / 2)) / div)
-    findir = dirs[funmath % len(dirs)]
+findir = dirs[funmath % len(dirs)]
     kmph = str(wind * 3.6).split(".")
     mph = str(wind * 2.237).split(".")
 
@@ -113,7 +112,7 @@ async def get_weather(weather):
 
     def celsius(c):
         temp = str(c - 273.15).split(".")
-        return temp[0]
+return temp[0]
 
     def sun(unix):
         return datetime.fromtimestamp(unix, tz=ctimezone).strftime("%I:%M %p")
@@ -121,24 +120,27 @@ async def get_weather(weather):
     results = (
         f"**Temperature:** `{celsius(curtemp)}°C | {fahrenheit(curtemp)}°F`\n"
         + f"**Min. Temp.:** `{celsius(min_temp)}°C | {fahrenheit(min_temp)}°F`\n"
-        + f"**Max. Temp.:** `{celsius(max_temp)}°C | {fahrenheit(max_temp)}°F`\n"
++ f"**Max. Temp.:** `{celsius(max_temp)}°C | {fahrenheit(max_temp)}°F`\n"
         + f"**Humidity:** `{humidity}%`\n"
         + f"**Wind:** `{kmph[0]} kmh | {mph[0]} mph, {findir}`\n"
         + f"**Sunrise:** `{sun(sunrise)}`\n"
         + f"**Sunset:** `{sun(sunset)}`\n\n"
-        + f"**{desc}**\n"
++ f"**{desc}**\n"
         + f"`{time}`\n"
     )
     if not anonymous:
         results += f"`{cityname}, {fullc_n}`"
 
-    await weather.edit(results)
+    wait weather.edit(results)
 
 
 CMD_HELP.update(
     {
-        "weather": ">`.weather <city> or .weather <city>, <country name/code>`"
-        "\nUsage: Gets the weather of a city."
-        "\nUse `.weather anon` to omit location details in results. (This needs WEATHER_DEFCITY to be set)"
+        "weather": f"**Plugin : **`weather`\
+\n\n • **Syntax :** `{cmd}weather` <city> or `.weather` <city>, <country name/code>\
+        \n • **Function : **To get city weather information.\
+        \n\n • **Syntax : **`{cmd}weather anon` \
+\n • **Function : **To get city weather information, and remove location details in results. (This requires the WEATHER_DEFCITY var to be set)\
+    "
     }
 )

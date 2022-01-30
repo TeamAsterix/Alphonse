@@ -1,4 +1,4 @@
-# Port from UniBorg by Ryoishin
+
 
 import asyncio
 import os
@@ -6,8 +6,9 @@ import time
 import zipfile
 from datetime import date
 
+from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, ZIP_DOWNLOAD_DIRECTORY, bot
-from userbot.events import register
+from userbot.events import alphonse_cmd
 from userbot.utils import progress
 
 # ====================
@@ -15,18 +16,18 @@ today = date.today()
 # ====================
 
 
-@register(outgoing=True, pattern=r"^\.compress(?: |$)(.*)")
+@bot.on(alphonse_cmd(outgoing=True, pattern=r"compress(?: |$)(.*)"))
 async def _(event):
     # Prevent Channel Bug to use update
     if event.is_channel and not event.is_group:
-        await event.edit("**Command isn't permitted on channels.**")
+        await event.edit("`Compress Command isn't permitted on channels`")
         return
     if event.fwd_from:
         return
     if not event.is_reply:
-        await event.edit("**Reply to a file to compress it.**")
+        await event.edit("`Reply to a file to compress it.`")
         return
-    mone = await event.edit("**Processing...**")
+    mone = await event.edit("`Processing...`")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -37,12 +38,12 @@ async def _(event):
                 reply_message,
                 TEMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, mone, c_time, "Zip - Download")
+                    progress(d, t, mone, c_time, "[DOWNLOADING]")
                 ),
             )
             directory_name = downloaded_file_name
             await event.edit(
-                f"Downloaded to `{directory_name}`" "\nCompressing file..."
+                f"Downloaded to `{directory_name}`" "`\ncompressing file...`"
             )
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
@@ -57,27 +58,27 @@ async def _(event):
         allow_cache=False,
         reply_to=event.message.id,
         progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-            progress(d, t, mone, c_time, "Zip - Upload")
+            progress(d, t, mone, c_time, "[UPLOADING]")
         ),
     )
-    await event.edit("**Done!**")
+    await event.edit("`Done!!`")
     await asyncio.sleep(7)
     await event.delete()
 
 
-@register(outgoing=True, pattern=r"^\.addzip(?: |$)(.*)")
+@bot.on(alphonse_cmd(outgoing=True, pattern=r"addzip(?: |$)(.*)"))
 async def addzip(add):
     """Copyright (c) 2020 azrim @github"""
     # Prevent Channel Bug to use update
     if add.is_channel and not add.is_group:
-        await add.edit("**Command isn't permitted on channels.**")
+        await add.edit("`Command isn't permitted on channels`")
         return
     if add.fwd_from:
         return
     if not add.is_reply:
-        await add.edit("**Reply to a file to compress it.**")
+        await add.edit("`Reply to a file to compress it.`")
         return
-    mone = await add.edit("**Processing...**")
+    mone = await add.edit("`Processing...`")
     if not os.path.isdir(ZIP_DOWNLOAD_DIRECTORY):
         os.makedirs(ZIP_DOWNLOAD_DIRECTORY)
     if add.reply_to_msg_id:
@@ -88,22 +89,22 @@ async def addzip(add):
                 reply_message,
                 ZIP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, mone, c_time, "Zip - Download")
+                    progress(d, t, mone, c_time, "[DOWNLOADING]")
                 ),
             )
             success = str(downloaded_file_name).replace("./zips/", "")
-            await add.edit(f"`{success}` successfully added to list.")
+            await add.edit(f"`{success} Successfully added to list`")
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
             return
 
 
-@register(outgoing=True, pattern=r"^\.upzip(?: |$)(.*)")
+@bot.on(alphonse_cmd(outgoing=True, pattern=r"upzip(?: |$)(.*)"))
 async def upload_zip(up):
     if not os.path.isdir(ZIP_DOWNLOAD_DIRECTORY):
-        await up.edit("**File not found.**")
+        await up.edit("`Files not found`")
         return
-    mone = await up.edit("**Zipping file...**")
+    mone = await up.edit("`Zipping File...`")
     input_str = up.pattern_match.group(1)
     curdate = today.strftime("%m%d%y")
     title = str(input_str) if input_str else "zipfile" + f"{curdate}"
@@ -118,25 +119,25 @@ async def upload_zip(up):
         allow_cache=False,
         reply_to=up.message.id,
         progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-            progress(d, t, mone, c_time, "Zip - Upload", input_str)
+            progress(d, t, mone, c_time, "[UPLOADING]", input_str)
         ),
     )
     os.rmdir(ZIP_DOWNLOAD_DIRECTORY)
     await up.delete()
 
 
-@register(outgoing=True, pattern=r"^\.rmzip(?: |$)(.*)")
+@bot.on(alphonse_cmd(outgoing=True, pattern=r"rmzip(?: |$)(.*)"))
 async def remove_dir(rm):
     if not os.path.isdir(ZIP_DOWNLOAD_DIRECTORY):
-        await rm.edit("**Directory not found.**")
+        await rm.edit("`Directory not found`")
         return
     os.rmdir(ZIP_DOWNLOAD_DIRECTORY)
-    await rm.edit("**Zip list removed.**")
+    await rm.edit("`Zip list removed`")
 
 
 def zipdir(path, ziph):
     # ziph is zipfile handle
-    for root, _, files in os.walk(path):
+    for root, dirs, files in os.walk(path):
         for file in files:
             ziph.write(os.path.join(root, file))
             os.remove(os.path.join(root, file))
@@ -144,13 +145,15 @@ def zipdir(path, ziph):
 
 CMD_HELP.update(
     {
-        "zipfile": "`.compress` [optional: <reply to file >]"
-        "\nUsage: make files to zip."
-        "\n\n`.addzip` <reply to file >"
-        "\nUsage: add files to zip list."
-        "\n\n`.upzip` [optional: <zip title>]"
-        "\nUsage: upload zip list."
-        "\n\n`.rmzip` [optional: <zip title>]"
-        "\nUsage: clear zip list."
+        "zipfile": f"**Plugin : **`zipfile`\
+        \n\n  •  **Syntax :** `{cmd}compress` **[optional: <reply to file>]**\
+        \n  •  **Function : **make files to zip.\
+        \n\n  •  **Syntax :** `{cmd}addzip` **<reply to file>**\
+        \n  •  **Function : **add files to zip list.\
+        \n\n  •  **Syntax :** `{cmd}upzip` **[optional: <zip title>]**\
+        \n  •  **Function : **upload zip list.\
+        \n\n  •  **Syntax :** `{cmd}rmzip` **[optional: <zip title>]**\
+        \n  •  **Function : **clear zip list.\
+    "
     }
 )

@@ -1,4 +1,9 @@
+
+
+
 class CancelProcess(Exception):
-    """
-    Cancel Process
-    """
+    """Cancel Process"""
+
+
+class FFmpegReturnCodeError(Exception):
+    pass
