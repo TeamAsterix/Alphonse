@@ -10,9 +10,7 @@ def add_to_queue(chat_id, songname, link, ref, type, quality):
 
 
 def get_queue(chat_id):
-    if chat_id in QUEUE:
-        return QUEUE[chat_id]
-    return 0
+    return QUEUE[chat_id] if chat_id in QUEUE else 0
 
 
 def pop_an_item(chat_id):

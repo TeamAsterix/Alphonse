@@ -24,4 +24,4 @@ except AttributeError as e:
     print(
         "DB_URI not configured. A feature that requires a database is having problems."
     )
-    print(str(e))
+    print(e)

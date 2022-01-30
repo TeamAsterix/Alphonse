@@ -903,7 +903,7 @@ class googleimagesdownload:
                 },
             ],
         }
-        for key, value in params.items():
+        for value in params.values():
             if value[0] is not None:
                 ext_param = value[1][value[0]]
                 # counter will tell if it is first param added or not
@@ -1422,9 +1422,7 @@ class googleimagesdownload:
             records = []
             json_file = json.load(open(arguments["config_file"]))
             for record in range(len(json_file["Records"])):
-                arguments = {}
-                for i in args_list:
-                    arguments[i] = None
+                arguments = {i: None for i in args_list}
                 for key, value in json_file["Records"][record].items():
                     arguments[key] = value
                 records.append(arguments)
