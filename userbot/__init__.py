@@ -72,13 +72,9 @@ if version_info[0] < 3 or version_info[1] < 9:
     )
     sys.exit(1)
 
-# Check if the config was edited by using the already used variable.
-# Basically, its the 'virginity check' for the config file ;)
-CONFIG_CHECK = os.environ.get(
+if CONFIG_CHECK := os.environ.get(
     "___________PLOX_______REMOVE_____THIS_____LINE__________", None
-)
-
-if CONFIG_CHECK:
+):
     LOGS.info(
         "Harap hapus baris yang disebutkan dalam tagar pertama dari file config.env"
     )
@@ -279,10 +275,7 @@ for binary, path in binaries.items():
 # Jangan di hapus Nanti ERROR
 
 # 'bot' variable
-if STRING_SESSION:
-    session = StringSession(str(STRING_SESSION))
-else:
-    session = "Alphonse"
+session = StringSession(str(STRING_SESSION)) if STRING_SESSION else "Alphonse"
 try:
     bot = TelegramClient(
         session=session,

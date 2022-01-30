@@ -96,11 +96,11 @@
 
 
  def get_size(bytes, suffix="B"):
-     factor = 1024
-     for unit in ["", "K", "M", "G", "T", "P"]:
-         if bytes < factor:
-             return f"{bytes:.2f}{units}{suffix}"
-         bytes /= factor
+  factor = 1024
+  for _ in ["", "K", "M", "G", "T", "P"]:
+   if bytes < factor:
+       return f"{bytes:.2f}{units}{suffix}"
+   bytes /= factor
 
 
  @alphonse_cmd(pattern="sysd$")

@@ -24,7 +24,7 @@
      rece = 0
      xx = f"{lll}" if lll else ""
      xnxx = await e.client.get_participants(e.chat_id, limit=99)
-     for users, bb in enumerate(xnxx):
+     for bb in xnxx:
          x = bb.status
          y = bb.participant
          if isinstance(x, onn):

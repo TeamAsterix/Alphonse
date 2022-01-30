@@ -16,19 +16,19 @@
 
 
  def shorten(description, info="anilist.co"):
-     msg = ""
-     if len(description) > 700:
-         description = description[0:200] + "....."
-         msg += f"\n**Description**:\n{description} [Read More]({info})"
-     else:
-         msg += f"\n**Description**: \n {description}"
-     returns (
-         msg.replace("<br>", "")
-         .replace("</br>", "")
-         .replace("<i>", "")
-         .replace("</i>", "")
-         .replace("__", "**")
-     )
+  msg = ""
+  if len(description) > 700:
+   description = description[:200] + "....."
+   msg += f"\n**Description**:\n{description} [Read More]({info})"
+  else:
+   msg += f"\n**Description**: \n {description}"
+  returns (
+      msg.replace("<br>", "")
+      .replace("</br>", "")
+      .replace("<i>", "")
+      .replace("</i>", "")
+      .replace("__", "**")
+  )
 
 
  character_query = """
@@ -198,32 +198,28 @@
 
  @bot.on(alphonse_cmd(outgoing=True, pattern=r"anichar ?(.*)"))
  async def anilist(event):
-     search = event.pattern_match.group(1)
-     reply_to_id = event.message.id
-     if event.reply_to_msg_id:
-         reply_to_id = event.reply_to_msg_id
-     variables = {"query": search}
-     json = (
-         requests.post(url, json={"query": character_query, "variables": variables})
-         .json()["data"]
-         .get("Character", None)
-     )
-     if json:
-         msg = f"**{json.get('name').get('full')}**\n"
-         description = f"{json['description']}"
-         site_url = json.get("siteUrl")
-         msg += shorten(description, site_url)
-         image = json.get("image", None)
-         if image:
-             image = image.get("large")
-             await event.delete()
-             await bot.send_file(
-                 event.chat_id, image, caption=msg, parse_mode="md", reply_to=reply_to_id
-             )
-         else:
-             await event.edit(msg)
-     else:
-         await event.edit("Sorry, No such results")
+  search = event.pattern_match.group(1)
+  reply_to_id = event.reply_to_msg_id or event.message.id
+  variables = {"query": search}
+  if json := (requests.post(
+      url, json={
+          "query": character_query,
+          "variables": variables
+      }).json()["data"].get("Character", None)):
+   msg = f"**{json.get('name').get('full')}**\n"
+   description = f"{json['description']}"
+   site_url = json.get("siteUrl")
+   msg += shorten(description, site_url)
+   if image := json.get("image", None):
+    image = image.get("large")
+    await event.delete()
+    await bot.send_file(
+        event.chat_id, image, caption=msg, parse_mode="md", reply_to=reply_to_id
+    )
+   else:
+    await event.edit(msg)
+  else:
+   await event.edit("Sorry, No such results")
 
 
  @bot.on(alphonse_cmd(outgoing=True, pattern=r"airing ?(.*)"))
@@ -245,63 +241,61 @@
 
  @bot.on(alphonse_cmd(outgoing=True, pattern=r"animanga ?(.*)"))
  async def anilist(event):
-     search = event.pattern_match.group(1)
-     reply_to_id = event.message.id
-     if event.reply_to_msg_id:
-         reply_to_id = event.reply_to_msg_id
-     variables = {"search": search}
-     json = (
-         requests.post(url, json={"query": manga_query, "variables": variables})
-         .json()["data"]
-         .get("Media", None)
-     )
-     ms_g = ""
-     if json:
-         title, title_native = json["title"].get("romaji", False), json["title"].get(
-             "native", False
-         )
-         start_date, status, score = (
-             json["startDate"].get("year", False),
-             json.get("status", False),
-             json.get("averageScore", False),
-         )
-         if title:
-             ms_g += f"**{title}**"
-             if title_native:
-                 ms_g += f"(`{title_native}`)"
-         if start_date:
-             ms_g += f"\n**Start Date** - `{start_date}`"
-         if status:
-             ms_g += f"\n**Status** - `{status}`"
-         if score:
-             ms_g += f"\n**Score** - `{score}`"
-         ms_g += "\n**Genres** - "
-         for x in json.get("genres", []):
-             ms_g += f"{x},"
-         ms_g = ms_g[:-2]
-         image = json.get("bannerImage", False)
-         ms_g += f"_{json.get('description', None)}_"
-         ms_g = (
-             ms_g.replace("<br>", "")
-             .replace("</br>", "")
-             .replace("<i>", "")
-             .replace("</i>", "")
-         )
-         if image:
-             try:
-                 await bot.send_file(
-                     event.chat_id,
-                     images,
-                     caption=ms_g,
-                     parse_mode="md",
-                     reply_to=reply_to_id,
-                 )
-                 await event.delete()
-             except BaseException:
-                 ms_g += f" [〽️]({image})"
-                 await event.edit(ms_g)
-         else:
-             await event.edit(ms_g)
+  search = event.pattern_match.group(1)
+  reply_to_id = event.reply_to_msg_id or event.message.id
+  variables = {"search": search}
+  json = (
+      requests.post(url, json={"query": manga_query, "variables": variables})
+      .json()["data"]
+      .get("Media", None)
+  )
+  ms_g = ""
+  if json:
+      title, title_native = json["title"].get("romaji", False), json["title"].get(
+          "native", False
+      )
+      start_date, status, score = (
+          json["startDate"].get("year", False),
+          json.get("status", False),
+          json.get("averageScore", False),
+      )
+      if title:
+          ms_g += f"**{title}**"
+          if title_native:
+              ms_g += f"(`{title_native}`)"
+      if start_date:
+          ms_g += f"\n**Start Date** - `{start_date}`"
+      if status:
+          ms_g += f"\n**Status** - `{status}`"
+      if score:
+          ms_g += f"\n**Score** - `{score}`"
+      ms_g += "\n**Genres** - "
+      for x in json.get("genres", []):
+          ms_g += f"{x},"
+      ms_g = ms_g[:-2]
+      image = json.get("bannerImage", False)
+      ms_g += f"_{json.get('description', None)}_"
+      ms_g = (
+          ms_g.replace("<br>", "")
+          .replace("</br>", "")
+          .replace("<i>", "")
+          .replace("</i>", "")
+      )
+      if image:
+          try:
+              await bot.send_file(
+                  event.chat_id,
+                  images,
+                  caption=ms_g,
+                  parse_mode="md",
+                  reply_to=reply_to_id,
+              )
+              await event.delete()
+          except BaseException:
+              ms_g += f" [〽️]({image})"
+              await event.edit(ms_g)
+      else:
+          await event.edit(ms_g)
 
 
  @bot.on(alphonse_cmd(outgoing=True, pattern=r"anilist ?(.*)"))
