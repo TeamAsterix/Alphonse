@@ -6,7 +6,7 @@ import os
 import re
 import sys
 import time
-import pytgcalls
+# import pytgcalls
 from distutils.util import strtobool as sb
 from logging import DEBUG, INFO, basicConfig, getLogger
 from math import ceil
@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 from git import Repo
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
-from pytgcalls import PyTgCalls
+# from pytgcalls import PyTgCalls
 from requests import get
 from telethon import Button
 from telethon.errors import UserIsBlockedError
