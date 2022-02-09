@@ -118,7 +118,7 @@ Ryoishin is licensed under [GNU Affero General Public License](https://www.gnu.o
 
 
 ## Credits
-   - Special thanks to [LonamiWebs](https://github.com/LonamiWebs/Telethon/) for Telethon library.💖
+   - Special thanks to [Dan](https://github.com/pyrogram/pyrogram) for Pyrogram library.💖
    - To all devs of these [Userbots](https://t.me/TheAlphonse/4)❣️
    - Finally to all [contributors of Alphonse](https://github.com/TeamAlphonse/Alphonse/graphs/contributors)❤️
    
