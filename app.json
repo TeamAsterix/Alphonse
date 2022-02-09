@@ -1,0 +1,106 @@
+{
+    "addons": [
+        {
+            "plan": "heroku-postgresql"
+        }
+    ],
+    "buildpacks": [
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+        },
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
+        }
+    ],
+    "description": "A modular Telegram userbot running on Python 3.9 with an sqlalchemy database,",
+    "env": {
+        "ALIVE_MSG": {
+            "description": "Custom message for .alive command. We have our own alive message by default.",
+            "required": false,
+            "value": "`Hello Master! I am alive \u2764\ufe0f`"
+        },
+        "API_HASH": {
+            "description": "Get this value from my.telegram.org.",
+            "required": true
+        },
+        "API_ID": {
+            "description": "Get this value from my.telegram.org.",
+            "required": true
+        },
+        "BOT_PREFIX": {
+            "description": "It changes your bot pattern (default pattern is '.' (dot)).",
+            "required": false
+        },
+        "CHROME_DRIVER": {
+            "description": "ChromeDriver location for selenium based modules.",
+            "required": false,
+            "value": "/usr/bin/chromedriver"
+        },
+        "HEROKU_APPNAME": {
+            "description": "Add the Heroku app name here. Required for updates.",
+            "required": true
+        },
+        "HEROKU_KEY": {
+            "description": "Heroku API key, get it from 'https://dashboard.heroku.com/account. Required for updates.",
+            "required": true
+        },
+        "LOG_ID": {
+            "description": "Chat ID of the Log group. If value is 0, log feature not work. If value is left blank, logs send in Saved Messages",
+            "required": false
+        },
+        "LOG_VERBOSE": {
+            "description": "If you need verbosity on the console logging.",
+            "required": false,
+            "value": "False"
+        },
+        "PM_AUTO_BAN": {
+            "description": "PM Auto Ban Feature. Also known as 'bleep blop, this is a bot...'.",
+            "required": false,
+            "value": "False"
+        },
+        "PM_MSG_COUNT": {
+            "description": "Custom PM Message Count for PM Auto Ban feature. Also known as Pmpermit Module.",
+            "required": false,
+            "value": "5"
+        },
+        "PM_UNAPPROVED": {
+            "description": "Custom message for PM Auto Ban feature. Also known as Pmpermit Module.",
+            "required": false
+        },
+        "REPO_URL": {
+            "description": "It helps your bot updates, if you maintain a fork repo you can add your repo URL here.",
+            "required": true,
+            "value": "https://github.com/TeamAlphonse/Alphonse"
+        },
+        "ALPHONSE_LANG": {
+            "description": "It permanently changes your bot's lang. Default is English (en).",
+            "required": false,
+            "value": "en"
+        },
+        "SESSION": {
+            "description": "Get this value by running python3 session.py in terminal or bash script.",
+            "required": true
+        }
+    },
+    "formation": {
+        "alphonse": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
+    "keywords": [
+        "telegram",
+        "userbot",
+        "python",
+        "alphonse",
+        "module",
+        "pyrogram",
+        "postgresql"
+    ],
+    "logo": "https://telegra.ph/file/f563aec4428693904f7f2.jpg",
+    "name": "Alphonse",
+    "repository": "https://github.com/TeamAlphonse/Alphonse",
+    "stack": "container",
+    "success_url": "https://telegram.dog/TeamAlphonse",
+    "website": "https://t.me/AlphonseSupport"
+}
