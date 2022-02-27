@@ -1,5 +1,0 @@
-build: 
-  docker: 
-      alphonse: Dockerfile
-run:
-   alphonse: python3 alphonse.py
